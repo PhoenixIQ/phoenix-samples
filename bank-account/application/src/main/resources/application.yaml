@@ -1,0 +1,61 @@
+# app info config
+spring:
+  application:
+    name: bank-account
+
+# web config
+server:
+  port: 8080
+
+# log config
+logging.config: classpath:logback.xml
+
+# 内存数据库管理页面
+spring.h2:
+  console:
+    path: /h2-console
+    enabled: true
+    settings:
+      web-allow-others: true
+
+# phoenix
+quantex:
+  phoenix:
+    routers:
+      - message: com.iquantex.phoenix.coreapi.Hello$HelloCmd
+        dst: bank-account/EA/Hello
+      - message: com.iquantex.phoenix.coreapi.AccountAllocateCmd
+        dst: bank-account/EA/BankAccount
+    server:
+      license: mock_license
+      name: ${spring.application.name}
+      mq:
+        type: kafka
+        address: embedded
+      event-store:
+        driver-class-name: org.h2.Driver
+        snapshot:
+          enabled: true
+        data-sources:
+          - url: jdbc:h2:file:./data/test;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS PUBLIC
+            username: sa
+            password:
+    client:
+      name: ${spring.application.name}-client
+      mq:
+        type: kafka
+        address: embedded
+
+# eureka  config
+service-center:
+  url: localhost:7070
+eureka:
+  client:
+    enabled: false
+    serviceUrl:
+      defaultZone: http://${service-center.url}/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    prefer-ip-address: true
+    appname: ${spring.application.name}

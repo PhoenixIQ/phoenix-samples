@@ -1,0 +1,136 @@
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>银行账户管理页面</title>
+    <style>
+        #a {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            margin-top: 50px;
+            margin-left: 75px;
+            width: 250px;
+            text-align: left;
+
+        }
+
+        #b {
+            margin-left: 400px;
+            height: 100%;
+        }
+
+        .formDiv {
+            text-align: right;
+            margin-right: 38px;
+            margin-top: 2px;
+        }
+
+        .title {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<div id="a">
+    <div id="a1">
+        <p class="title"><b>账户总览</b></p>
+        自动刷新：
+        开<input type="radio" name="refreshRadio" value="open">
+        关<input type="radio" name="refreshRadio" value="close" checked>
+        <button style="text-align: right" onclick="getHtmlTable()">刷新</button>
+        <br/><br/>
+    </div>
+    <br/><br/>
+
+    <div id="a2">
+        <p class="title"><b>随机划拨</b></p>
+        <form name="batchAllocateForm" action="">
+            划拨总数：<input type="text" name="total"><br/>
+            每秒次数：<input type="text" name="tps"><br/>
+            账户范围：<input type="text" name="aggNum"><br/>
+            <div class="formDiv">
+                <button id="batchAllocateButton" type="button" style="width: 40px" onclick="batchAllocate()">发送</button>
+            </div>
+        </form>
+    </div>
+    <br/><br/>
+
+    <div id="a3">
+        <p class="title"><b>定向划拨</b></p>
+        <form name="directAllocateForm" action="">
+            划拨账户：<input type="text" name="inAccount"><br/>
+            划拨金额：<input type="text" name="amt"><br/>
+            <div class="formDiv">
+                <button id="directAllocateButton" type="button" style="width: 40px" onclick="directAllocate()">发送
+                </button>
+            </div>
+        </form>
+    </div>
+
+</div>
+<br/><br/>
+
+
+<div id="b">
+
+</div>
+<script src="axios/axios.js"></script>
+<script src="jq/jquery.js"></script>
+<script type="text/javascript">
+
+    var dt;
+
+    window.onload = stopInterval();
+
+    $('input:radio[name="refreshRadio"]').click(function () {
+        var checkValue = $('input:radio[name="refreshRadio"]:checked').val();
+        if (checkValue == "open") {
+            openInterval();
+        } else {
+            stopInterval();
+        }
+    });
+
+    function openInterval() {
+        dt = setInterval(function () {
+            getHtmlTable()
+        }, 2000);
+    }
+
+    function stopInterval() {
+        clearInterval(dt)
+    }
+
+    function getHtmlTable() {
+        axios.get("/accounts")
+            .then(function (response) {
+                console.log(response.data);
+                $("#b").html(response.data);
+            })
+    }
+
+    function batchAllocate() {
+        var total = batchAllocateForm.total.value;
+        var tps = batchAllocateForm.tps.value;
+        var aggNum = batchAllocateForm.aggNum.value;
+        axios.get("/accounts/allocate/pf/" + total + "/" + tps + "/" + aggNum)
+            .then(function (response) {
+                alert(response.data)
+            })
+    }
+
+    function directAllocate() {
+        var account = directAllocateForm.inAccount.value;
+        var amt = directAllocateForm.amt.value;
+        axios.put("/accounts/allocate/" + account + "/" + amt)
+            .then(function (response) {
+                alert(response.data)
+            })
+    }
+
+</script>
+</body>
+</html>
+

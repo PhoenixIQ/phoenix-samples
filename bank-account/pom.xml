@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>2.0.1.RELEASE</version>
+    </parent>
+
+    <groupId>com.iquantex.phoenix</groupId>
+    <artifactId>bank-account</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <!--common set-->
+        <revision>1.0-SNAPSHOT</revision>
+        <phoenix.version>2.1.2</phoenix.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!--组件版本-->
+        <swagger2.version>2.6.1</swagger2.version>
+        <lombook.version>1.16.20</lombook.version>
+        <proto.version>3.4.0</proto.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <!--sub modules-->
+            <dependency>
+                <groupId>com.iquantex.phoenix</groupId>
+                <artifactId>bank-account.coreapi</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.iquantex.phoenix</groupId>
+                <artifactId>bank-account.application</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.iquantex.phoenix</groupId>
+                <artifactId>bank-account.domain</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <!--phoenix-->
+            <dependency>
+                <groupId>com.iquantex</groupId>
+                <artifactId>phoenix-server-starter</artifactId>
+                <version>${phoenix.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.iquantex</groupId>
+                <artifactId>phoenix-client-starter</artifactId>
+                <version>${phoenix.version}</version>
+            </dependency>
+
+            <!--tools-->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombook.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.protobuf</groupId>
+                <artifactId>protobuf-java</artifactId>
+                <version>${proto.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger2.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+
+    <build>
+        <plugins>
+            <!--编译插件-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <!--代码格式化插件-->
+            <plugin>
+                <groupId>io.spring.javaformat</groupId>
+                <artifactId>spring-javaformat-maven-plugin</artifactId>
+                <version>0.0.15</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <inherited>true</inherited>
+                        <goals>
+                            <goal>validate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+    </build>
+
+    <repositories>
+        <repository>
+            <id>quantex</id>
+            <name>Quantex Maven Repository</name>
+            <url>https://artifact.iquantex.com/repository/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <layout>default</layout>
+        </repository>
+    </repositories>
+
+    <modules>
+        <module>application</module>
+        <module>coreapi</module>
+        <module>domain</module>
+    </modules>
+</project>
