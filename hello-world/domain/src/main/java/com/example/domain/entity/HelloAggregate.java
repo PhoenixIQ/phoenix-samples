@@ -30,8 +30,7 @@ public class HelloAggregate implements Serializable {
 	 */
 	@AggregateRootIdAnnotation(aggregateRootId = "helloId")
 	public ActReturn act(Hello.HelloCmd cmd) {
-		log.info("Hello World Phoenix...");
-		return ActReturn.builder().retCode(RetCode.SUCCESS).retMessage("success")
+		return ActReturn.builder().retCode(RetCode.SUCCESS).retMessage("Hello World Phoenix...")
 				.event(Hello.HelloEvent.newBuilder().setHelloId(cmd.getHelloId()).build()).build();
 	}
 

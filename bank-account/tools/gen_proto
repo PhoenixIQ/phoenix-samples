@@ -1,4 +1,0 @@
-# 回到工程目录
-cd `dirname $0`/../
-pwd
-protoc -I ./coreapi/src/main/resources --java_out=./coreapi/src/main/java/  ./coreapi/src/main/resources/*.proto

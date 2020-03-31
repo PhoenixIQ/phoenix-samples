@@ -21,7 +21,6 @@ spring.h2:
 # phoenix
 quantex:
   phoenix:
-    license: mock_license
     routers:
       - message: com.example.coreapi.Hello$HelloCmd
         dst: helloworld/EA/Hello

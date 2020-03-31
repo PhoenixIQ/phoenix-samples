@@ -63,14 +63,10 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <!-- 由于parent工程不是spring-boot-parent，需要采用repackage解决 -->
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <configuration>
+                    <skip>false</skip>
+                    <mainClass>com.iquantex.phoenix.application.BankAccountApplication</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>

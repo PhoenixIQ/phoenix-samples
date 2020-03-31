@@ -27,7 +27,6 @@ quantex:
       - message: com.iquantex.phoenix.coreapi.AccountAllocateCmd
         dst: bank-account/EA/BankAccount
     server:
-      license: mock_license
       name: ${spring.application.name}
       mq:
         type: kafka

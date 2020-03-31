@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.example</groupId>
-        <artifactId>helloworld</artifactId>
+        <artifactId>hello-world</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>helloworld.application</artifactId>
+    <artifactId>hello-world.application</artifactId>
 
     <dependencies>
 
@@ -27,11 +27,11 @@
         <!--内部依赖-->
         <dependency>
             <groupId>com.example</groupId>
-            <artifactId>helloworld.domain</artifactId>
+            <artifactId>hello-world.domain</artifactId>
         </dependency>
         <dependency>
             <groupId>com.example</groupId>
-            <artifactId>helloworld.coreapi</artifactId>
+            <artifactId>hello-world.coreapi</artifactId>
         </dependency>
 
         <!--swagger2-->
@@ -47,30 +47,16 @@
     </dependencies>
 
     <build>
-        <finalName>helloworld.application</finalName>
+        <finalName>hello-world.application</finalName>
         <plugins>
-            <!-- maven管理插件 -->
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.0.2</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>utf-8</encoding>
-                </configuration>
-            </plugin>
             <!-- springboot打包插件 -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <!-- 由于parent工程不是spring-boot-parent，需要采用repackage解决 -->
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <configuration>
+                    <skip>false</skip>
+                    <mainClass>com.example.HelloWorldApplication</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>
