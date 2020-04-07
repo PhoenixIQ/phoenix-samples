@@ -1,9 +1,7 @@
 package com.iquantex.shoppingcart.domain.inventory;
 
 import com.iquantex.phoenix.server.test.util.EntityAggregateFixture;
-import com.iquantex.shoppingcart.coreapi.hello.Hello;
 import com.iquantex.shoppingcart.coreapi.inventory.*;
-import com.iquantex.shoppingcart.domain.hello.entity.HelloAggregate;
 import org.junit.Assert;
 import org.junit.Test;
 
