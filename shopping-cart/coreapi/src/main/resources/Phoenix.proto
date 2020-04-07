@@ -1,0 +1,16 @@
+syntax = "proto2";
+
+// 生成类的包路径
+option java_package = "com.iquantex.shopping.coreapi";
+//生成的数据访问类的类名
+option java_outer_classname = "Hello";
+
+message HelloCmd {
+    // 聚合根ID
+    optional string helloId = 1;
+}
+
+message HelloEvent {
+    // 聚合根ID
+    optional string helloId = 1;
+}

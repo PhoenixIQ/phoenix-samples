@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>shopping-cart</artifactId>
+        <groupId>com.iquantex.shoppingcart</groupId>
+        <version>${revision}</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>shopping-cart.domain</artifactId>
+
+    <dependencies>
+        <!--内部依赖-->
+        <dependency>
+            <groupId>com.iquantex.shoppingcart</groupId>
+            <artifactId>shopping-cart.coreapi</artifactId>
+        </dependency>
+
+        <!--phoenix-->
+        <dependency>
+            <groupId>com.iquantex</groupId>
+            <artifactId>phoenix-server-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.iquantex</groupId>
+            <artifactId>phoenix-client-starter</artifactId>
+        </dependency>
+    </dependencies>
+
+
+</project>
