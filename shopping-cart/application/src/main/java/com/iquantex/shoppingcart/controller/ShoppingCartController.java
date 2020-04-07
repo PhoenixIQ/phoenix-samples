@@ -5,8 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iquantex.phoenix.client.PhoenixClient;
 import com.iquantex.phoenix.client.RpcResult;
 import com.iquantex.shoppingcart.coreapi.inventory.InventoryAllocateCmd;
-import com.iquantex.shoppingcart.coreapi.inventory.InventoryItemQueryCmd;
 import com.iquantex.shoppingcart.coreapi.inventory.InventoryItemQueryEvent;
+import com.iquantex.shoppingcart.coreapi.shopping.ShoppingCartOptionCmd;
+import com.iquantex.shoppingcart.coreapi.shopping.ShoppingCartQueryListCmd;
+import com.iquantex.shoppingcart.coreapi.shopping.ShoppingCartQueryListEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +21,8 @@ import java.util.concurrent.TimeoutException;
 
 @Slf4j
 @RestController
-@RequestMapping("inventory")
-public class InventoryController {
+@RequestMapping("shoppingcart")
+public class ShoppingCartController {
 
 	@Autowired
 	private PhoenixClient client;
@@ -28,12 +30,12 @@ public class InventoryController {
 	@Autowired
 	private ObjectMapper objectMapper;
 
-	@PutMapping("/{itemId}/{allocateQty}")
-	public String allocateBalanceQty(@PathVariable String itemId, @PathVariable int allocateQty) {
-		InventoryAllocateCmd inventoryAllocateCmd = InventoryAllocateCmd.builder().itemId(itemId)
-				.allocateQty(allocateQty).build();
+	@PutMapping("/{userId}/{itemId}/{qty}")
+	public String allocateBalanceQty(@PathVariable String userId, @PathVariable String itemId, @PathVariable int qty) {
+		ShoppingCartOptionCmd shoppingCartOptionCmd = ShoppingCartOptionCmd.builder().userId(userId).itemId(itemId)
+				.qty(qty).build();
 
-		Future<RpcResult> future = client.send(inventoryAllocateCmd, UUID.randomUUID().toString());
+		Future<RpcResult> future = client.send(shoppingCartOptionCmd, UUID.randomUUID().toString());
 		try {
 			RpcResult result = future.get(10, TimeUnit.SECONDS);
 			return result.getMessage();
@@ -43,15 +45,15 @@ public class InventoryController {
 		}
 	}
 
-	@GetMapping("/{itemId}")
-	public String queryBalanceQty(@PathVariable String itemId) {
-		InventoryItemQueryCmd inventoryItemQueryCmd = InventoryItemQueryCmd.builder().itemId(itemId).build();
+	@GetMapping("/{userId}")
+	public String queryShoppingCart(@PathVariable String userId) {
+		ShoppingCartQueryListCmd shoppingCartQueryListCmd = ShoppingCartQueryListCmd.builder().userId(userId).build();
 
-		Future<RpcResult> future = client.send(inventoryItemQueryCmd, UUID.randomUUID().toString());
+		Future<RpcResult> future = client.send(shoppingCartQueryListCmd, UUID.randomUUID().toString());
 		try {
 			RpcResult result = future.get(10, TimeUnit.SECONDS);
-			InventoryItemQueryEvent inventoryItemQueryEvent = (InventoryItemQueryEvent) result.getData();
-			return objectMapper.writeValueAsString(inventoryItemQueryEvent);
+			ShoppingCartQueryListEvent shoppingCartQueryListEvent = (ShoppingCartQueryListEvent) result.getData();
+			return objectMapper.writeValueAsString(shoppingCartQueryListEvent);
 		}
 		catch (InterruptedException | ExecutionException | TimeoutException | JsonProcessingException e) {
 			return "rpc error: " + e.getMessage();
