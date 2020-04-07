@@ -1,9 +1,9 @@
 package com.example.domain.entity;
 
 import com.example.coreapi.Hello;
-import com.iquantex.phoenix.server.aggregate.model.ActReturn;
-import com.iquantex.phoenix.server.aggregate.entity.AggregateRootIdAnnotation;
+import com.iquantex.phoenix.server.aggregate.entity.CommandHandler;
 import com.iquantex.phoenix.server.aggregate.entity.EntityAggregateAnnotation;
+import com.iquantex.phoenix.server.aggregate.model.ActReturn;
 import com.iquantex.phoenix.server.aggregate.model.RetCode;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +28,7 @@ public class HelloAggregate implements Serializable {
 	 * @param cmd hello 指令
 	 * @return 处理结果
 	 */
-	@AggregateRootIdAnnotation(aggregateRootId = "helloId")
+	@CommandHandler(aggregateRootId = "helloId")
 	public ActReturn act(Hello.HelloCmd cmd) {
 		return ActReturn.builder().retCode(RetCode.SUCCESS).retMessage("Hello World Phoenix...")
 				.event(Hello.HelloEvent.newBuilder().setHelloId(cmd.getHelloId()).build()).build();
