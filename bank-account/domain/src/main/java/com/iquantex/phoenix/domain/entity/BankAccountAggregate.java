@@ -4,7 +4,7 @@ import com.iquantex.phoenix.coreapi.AccountAllocateCmd;
 import com.iquantex.phoenix.coreapi.AccountAllocateFailEvent;
 import com.iquantex.phoenix.coreapi.AccountAllocateOkEvent;
 import com.iquantex.phoenix.coreapi.TestCmd;
-import com.iquantex.phoenix.server.aggregate.entity.AggregateRootIdAnnotation;
+import com.iquantex.phoenix.server.aggregate.entity.CommandHandler;
 import com.iquantex.phoenix.server.aggregate.entity.EntityAggregateAnnotation;
 import com.iquantex.phoenix.server.aggregate.model.ActReturn;
 import com.iquantex.phoenix.server.aggregate.model.RetCode;
@@ -47,7 +47,7 @@ public class BankAccountAggregate implements Serializable {
 	 * @param cmd 划拨指令
 	 * @return
 	 */
-	@AggregateRootIdAnnotation(aggregateRootId = "accountCode")
+	@CommandHandler(aggregateRootId = "accountCode")
 	public ActReturn act(AccountAllocateCmd cmd) {
 
 		if (balanceAmt + cmd.getAmt() < 0) {
@@ -63,7 +63,7 @@ public class BankAccountAggregate implements Serializable {
 		}
 	}
 
-	@AggregateRootIdAnnotation(aggregateRootId = "accountCode")
+	@CommandHandler(aggregateRootId = "accountCode")
 	public ActReturn act(TestCmd cmd) {
 
 		if (balanceAmt + cmd.getAmt() < 0) {
