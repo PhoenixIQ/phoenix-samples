@@ -16,7 +16,7 @@
     <properties>
         <!--common set-->
         <revision>1.0-SNAPSHOT</revision>
-        <phoenix.version>2.1.2</phoenix.version>
+        <phoenix.version>dev-SNAPSHOT</phoenix.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 

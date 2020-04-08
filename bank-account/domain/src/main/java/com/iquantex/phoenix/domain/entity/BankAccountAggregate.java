@@ -3,8 +3,7 @@ package com.iquantex.phoenix.domain.entity;
 import com.iquantex.phoenix.coreapi.AccountAllocateCmd;
 import com.iquantex.phoenix.coreapi.AccountAllocateFailEvent;
 import com.iquantex.phoenix.coreapi.AccountAllocateOkEvent;
-import com.iquantex.phoenix.coreapi.TestCmd;
-import com.iquantex.phoenix.server.aggregate.entity.AggregateRootIdAnnotation;
+import com.iquantex.phoenix.server.aggregate.entity.CommandHandler;
 import com.iquantex.phoenix.server.aggregate.entity.EntityAggregateAnnotation;
 import com.iquantex.phoenix.server.aggregate.model.ActReturn;
 import com.iquantex.phoenix.server.aggregate.model.RetCode;
@@ -47,24 +46,8 @@ public class BankAccountAggregate implements Serializable {
 	 * @param cmd 划拨指令
 	 * @return
 	 */
-	@AggregateRootIdAnnotation(aggregateRootId = "accountCode")
+	@CommandHandler(aggregateRootId = "accountCode")
 	public ActReturn act(AccountAllocateCmd cmd) {
-
-		if (balanceAmt + cmd.getAmt() < 0) {
-			String retMessage = String.format("账户划拨失败,账户余额不足: 账户余额:%f, 划拨金额：%f", balanceAmt, cmd.getAmt());
-			return ActReturn.builder().retCode(RetCode.FAIL).retMessage(retMessage)
-					.event(new AccountAllocateFailEvent(cmd.getAccountCode(), cmd.getAmt(), retMessage)).build();
-
-		}
-		else {
-			String retMessage = String.format("账户划拨成功：划拨金额：%.2f，账户余额：%.2f", cmd.getAmt(), balanceAmt + cmd.getAmt());
-			return ActReturn.builder().retCode(RetCode.SUCCESS).retMessage(retMessage)
-					.event(new AccountAllocateOkEvent(cmd.getAccountCode(), cmd.getAmt())).build();
-		}
-	}
-
-	@AggregateRootIdAnnotation(aggregateRootId = "accountCode")
-	public ActReturn act(TestCmd cmd) {
 
 		if (balanceAmt + cmd.getAmt() < 0) {
 			String retMessage = String.format("账户划拨失败,账户余额不足: 账户余额:%f, 划拨金额：%f", balanceAmt, cmd.getAmt());
