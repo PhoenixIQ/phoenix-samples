@@ -40,11 +40,11 @@ public class ShoppingCartAggregate implements Serializable {
 	 * @return
 	 */
 	@CommandHandler(aggregateRootId = "userId")
-	private ActReturn act(ShoppingCartOptionCmd cmd) {
+	public ActReturn act(ShoppingCartOptionCmd cmd) {
 
 		ItemEntity itemEntity = items.getOrDefault(cmd.getItemId(), new ItemEntity(cmd.getItemId(), 0));
 
-		// 1. 扣减购买数量逻辑校验: 不存在该商品
+		// 1. 扣减购买数量逻辑校验: 购物车中不存在该商品
 		if (itemEntity.canOptionQty(cmd.getQty())) {
 			return ActReturn.builder().retCode(RetCode.FAIL).retMessage("购物车调整失败: 不存在该商品,不能减少数量")
 					.event(ShoppingCartOptionFailEvent.builder().userId(cmd.getUserId()).itemId(cmd.getItemId())
@@ -53,7 +53,7 @@ public class ShoppingCartAggregate implements Serializable {
 		}
 
 		// 2. 增加购买数量逻辑校验: 库存是否充足
-		if (cmd.getQty() > 0 && inventoryItemService.inventoryAdequacy(itemEntity.getItemId(), itemEntity.getQty())) {
+		if (cmd.getQty() > 0 && !inventoryItemService.inventoryAdequacy(itemEntity.getItemId(), itemEntity.getQty())) {
 			return ActReturn
 					.builder().retCode(RetCode.FAIL).retMessage("购物车调整失败: 库存数量不够").event(ShoppingCartOptionFailEvent
 							.builder().userId(cmd.getUserId()).itemId(cmd.getItemId()).qty(cmd.getQty()).build())
@@ -71,7 +71,7 @@ public class ShoppingCartAggregate implements Serializable {
 	 * @return
 	 */
 	@QueryHandler(aggregateRootId = "userId")
-	private ActReturn act(ShoppingCartQueryListCmd cmd) {
+	public ActReturn act(ShoppingCartQueryListCmd cmd) {
 		List<ShoppingCartQueryListEvent.ItemRsp> itemRsps = new ArrayList<>();
 		for (ItemEntity itemEntity : items.values()) {
 			itemRsps.add(new ShoppingCartQueryListEvent.ItemRsp(itemEntity.getItemId(), itemEntity.getQty(),
@@ -79,7 +79,7 @@ public class ShoppingCartAggregate implements Serializable {
 
 		}
 		return ActReturn.builder().retCode(RetCode.SUCCESS).retMessage("购物车查询成功")
-				.event(ShoppingCartQueryListEvent.builder().userId(userId).itemRspList(itemRsps)).build();
+				.event(ShoppingCartQueryListEvent.builder().userId(userId).itemRspList(itemRsps).build()).build();
 	}
 
 	/**

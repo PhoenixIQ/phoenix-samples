@@ -13,10 +13,10 @@ import java.io.Serializable;
 @Builder
 public class InventoryAllocateFailEvent implements Serializable {
 
-    /** 商品ID **/
-    private String itemId;
+	/** 商品ID **/
+	private String itemId;
 
-    /** 商品出入库数量(正/负->入库/出库) **/
-    private int allocateQty;
+	/** 商品出入库数量(正/负->入库/出库) **/
+	private int allocateQty;
 
 }

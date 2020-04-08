@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Builder
 public class InventoryItemQueryCmd implements Serializable {
 
-    /** 商品ID **/
-    private String itemId;
+	/** 商品ID **/
+	private String itemId;
 
 }

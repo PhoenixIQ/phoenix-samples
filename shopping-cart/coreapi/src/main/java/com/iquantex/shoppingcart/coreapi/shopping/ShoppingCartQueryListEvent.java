@@ -3,6 +3,7 @@ package com.iquantex.shoppingcart.coreapi.shopping;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.List;
@@ -23,7 +24,8 @@ public class ShoppingCartQueryListEvent implements Serializable {
 
 	@Getter
 	@AllArgsConstructor
-	public static class ItemRsp {
+	@NoArgsConstructor
+	public static class ItemRsp implements Serializable {
 
 		/** 商品ID **/
 		private String itemId;

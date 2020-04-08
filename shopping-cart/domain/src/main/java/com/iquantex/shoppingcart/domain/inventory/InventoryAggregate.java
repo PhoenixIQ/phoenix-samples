@@ -58,5 +58,4 @@ public class InventoryAggregate implements Serializable {
 		// not do something.
 	}
 
-
 }

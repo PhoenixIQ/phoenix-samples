@@ -26,7 +26,7 @@ public class InventoryItemService {
 	 * @return
 	 */
 	public boolean inventoryAdequacy(String itemId, int qty) {
-		return getInventoryItemBalanceQtyByItemId(itemId) - qty > 0;
+		return getInventoryItemBalanceQtyByItemId(itemId) - qty >= 0;
 	}
 
 	/**

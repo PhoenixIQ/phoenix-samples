@@ -24,6 +24,14 @@ quantex:
     routers:
       - message: com.iquantex.shopping.coreapi.hello.Hello$HelloCmd
         dst: shopping-cart/EA/Hello
+      - message: com.iquantex.shoppingcart.coreapi.shopping.ShoppingCartOptionCmd
+        dst: shopping-cart/EA/shoppingcart
+      - message: com.iquantex.shoppingcart.coreapi.inventory.InventoryAllocateCmd
+        dst: shopping-cart/EA/inventory
+      - message: com.iquantex.shoppingcart.coreapi.shopping.ShoppingCartQueryListCmd
+        dst: shopping-cart/EA/shoppingcart
+      - message: com.iquantex.shoppingcart.coreapi.inventory.InventoryItemQueryCmd
+        dst: shopping-cart/EA/inventory
     server:
       name: ${spring.application.name}
       mq:
