@@ -28,7 +28,7 @@
 
 ### 接口说明
 
-#### /shoppingcart/{userId}/{itemId}/{qty}
+#### PUT /shoppingcart/{userId}/{itemId}/{qty}
 
 **说明**: 调整购物车的商品数量
 
@@ -40,7 +40,7 @@
 ```json
 购物车调整成功
 ```
-#### /shoppingcart/{userId}
+#### GET /shoppingcart/{userId}
 
 **说明**: 获取某个用户的购物车的商品列表(需要判定是否可以购买)。
 
@@ -61,7 +61,7 @@
 
 ### 接口说明
 
-#### /inventory/{itemId}/{allocateQty}
+#### PUT /inventory/{itemId}/{allocateQty}
 
 **说明**: 对某个商品进行出库或入库操作
 
@@ -75,7 +75,7 @@
 ```
 
 
-#### /inventory/{itemId}
+#### GET /inventory/{itemId}
 **说明**: 查看某个商品的库存数量
 
 **响应**:
