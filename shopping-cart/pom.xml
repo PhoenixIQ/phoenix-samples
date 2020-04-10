@@ -3,28 +3,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-dependencies</artifactId>
-        <version>2.0.1.RELEASE</version>
+        <groupId>com.example</groupId>
+        <artifactId>phoenix-samples</artifactId>
+        <version>${revision}</version>
     </parent>
 
     <groupId>com.iquantex.shoppingcart</groupId>
     <artifactId>shopping-cart</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
-
-    <properties>
-        <!--common set-->
-        <revision>1.0-SNAPSHOT</revision>
-        <phoenix.version>dev-SNAPSHOT</phoenix.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-        <!--组件版本-->
-        <swagger2.version>2.6.1</swagger2.version>
-        <lombook.version>1.16.20</lombook.version>
-        <proto.version>3.4.0</proto.version>
-    </properties>
 
     <dependencyManagement>
         <dependencies>
