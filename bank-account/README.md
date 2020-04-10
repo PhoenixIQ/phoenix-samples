@@ -5,12 +5,13 @@
 ## 运行启动
 - `mvn spring-boot:run`
 - 打开浏览器[http://localhost:8080/](http://localhost:8080/)
+
 ![Colin](doc/image/show2.png)
 
-体验功能
+### 体验功能
 
- - 随机划拨：指定划拨总数、 每秒划拨的次数、账户总数，账户之间可进行随机的划拨
- - 定向划拨：可以向指定账户划拨指定的金额
+ - **随机划拨**：指定划拨总数、 每秒划拨的次数、账户总数，账户之间可进行随机的划拨
+ - **定向划拨**：可以向指定账户划拨指定的金额
 
 
 ## 场景描述
@@ -31,9 +32,9 @@
 
 ### 业务逻辑
 
-资金划入：划拨金额大于0
+**资金划入**：划拨金额大于0
 
-资金划出：划拨金额小于0
+**资金划出**：划拨金额小于0
 
 如果账户余额 + 划拨金额 小于0，返回账户划拨失败，账户余额不足。
 
@@ -46,7 +47,7 @@
 
 ### 消息定义
 
-通过上面的 `银行账户划拨案例介绍` 我们可以在coreapi模块中清晰的定义出如下命令和事件。phoenix 的API定义支持 `google protocol-buffers` 和 `java bean` ， 这里为了快速实现选用 `java bean` 来定义类定义必须支持Serializable，因为消息在通讯传输和存储的时候需要支持序列化和反序列化
+通过上面的 `银行账户划拨案例介绍` 我们可以在coreapi模块中清晰的定义出如下命令和事件。phoenix 的API定义支持 `google protocol-buffers` 和 `java bean` ， 这里为了快速实现选用 `java bean` 来定义类定义必须支持`Serializable`，因为消息在通讯传输和存储的时候需要支持序列化和反序列化
 
 ```java
 // 账户划拨命令
@@ -81,9 +82,9 @@ public class AccountAllocateOkEvent implements Serializable {
 
 ### 聚合根定义
 
-通过上面的 `银行账户划拨案例介绍` 我们可以在domain模块中清晰的定义出银行账户聚合根实体 `BankAccountAggregate`。银行账户聚合根是整个账户的所有消息的统一入口，银行账户聚合根拥有 `账户` 和 `余额` 等核心业务数据，以及 `成功转出次数` 、 `失败转出次数` 和 `成功转入次数` 等辅助统计数据。聚合根是phoenix的对象定义，开发时需要遵循phoenix规范。具体代码如下。
+通过上面的 `银行账户划拨案例介绍` 我们可以在domain模块中清晰的定义出银行账户聚合根实体 `BankAccountAggregate`。银行账户聚合根是整个账户的所有消息的统一入口，银行账户聚合根拥有 `账户` 和 `余额` 等核心业务数据，以及 `成功转出次数` 、 `失败转出次数` 和 `成功转入次数` 等辅助统计数据。聚合根是phoenix的对象定义，开发时需要遵循phoenix规范。具体代码如下:
 
-***注意聚合根类需要实现Serializable接口并定义`serialVersionUID`，如以下所示***
+***注意：聚合根类需要实现Serializable接口并定义`serialVersionUID`，如以下所示:***
 
 ```java
 @EntityAggregateAnnotation(aggregateRootType = "BankAccount")
