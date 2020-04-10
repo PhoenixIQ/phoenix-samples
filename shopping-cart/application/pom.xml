@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.iquantex.shoppingcart</groupId>
+        <artifactId>shopping-cart</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>shopping-cart.application</artifactId>
+
+    <dependencies>
+
+        <!-- spring-starter -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!--phoenix-->
+        <dependency>
+            <groupId>com.iquantex</groupId>
+            <artifactId>phoenix-client-starter</artifactId>
+        </dependency>
+
+        <!--内部依赖-->
+        <dependency>
+            <groupId>com.iquantex.shoppingcart</groupId>
+            <artifactId>shopping-cart.domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.iquantex.shoppingcart</groupId>
+            <artifactId>shopping-cart.coreapi</artifactId>
+        </dependency>
+
+        <!--swagger2-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <finalName>shopping-cart.application</finalName>
+        <plugins>
+            <!-- maven管理插件 -->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.0.2</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>utf-8</encoding>
+                </configuration>
+            </plugin>
+            <!-- springboot打包插件 -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <!-- 由于parent工程不是spring-boot-parent，需要采用repackage解决 -->
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <skip>false</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
