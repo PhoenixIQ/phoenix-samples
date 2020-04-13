@@ -1,6 +1,6 @@
-package com.iquantex.phoenix.domain.entity;
+package com.iquantex.samples.account.domain;
 
-import com.iquantex.phoenix.coreapi.Hello;
+import com.iquantex.samples.account.coreapi.Hello;
 import com.iquantex.phoenix.server.aggregate.entity.CommandHandler;
 import com.iquantex.phoenix.server.aggregate.entity.EntityAggregateAnnotation;
 import com.iquantex.phoenix.server.aggregate.model.ActReturn;

@@ -1,4 +1,4 @@
-package com.iquantex.phoenix.coreapi;
+package com.iquantex.samples.account.coreapi;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

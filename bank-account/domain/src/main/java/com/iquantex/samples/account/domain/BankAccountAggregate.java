@@ -1,8 +1,8 @@
-package com.iquantex.phoenix.domain.entity;
+package com.iquantex.samples.account.domain;
 
-import com.iquantex.phoenix.coreapi.AccountAllocateCmd;
-import com.iquantex.phoenix.coreapi.AccountAllocateFailEvent;
-import com.iquantex.phoenix.coreapi.AccountAllocateOkEvent;
+import com.iquantex.samples.account.coreapi.AccountAllocateCmd;
+import com.iquantex.samples.account.coreapi.AccountAllocateFailEvent;
+import com.iquantex.samples.account.coreapi.AccountAllocateOkEvent;
 import com.iquantex.phoenix.server.aggregate.entity.CommandHandler;
 import com.iquantex.phoenix.server.aggregate.entity.EntityAggregateAnnotation;
 import com.iquantex.phoenix.server.aggregate.model.ActReturn;

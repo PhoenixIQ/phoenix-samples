@@ -1,4 +1,4 @@
-package com.iquantex.phoenix;
+package com.iquantex.account;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;

@@ -119,8 +119,7 @@ public final class Hello {
 
 		protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable internalGetFieldAccessorTable() {
 			return Hello.internal_static_HelloCmd_fieldAccessorTable
-					.ensureFieldAccessorsInitialized(Hello.HelloCmd.class,
-							Hello.HelloCmd.Builder.class);
+					.ensureFieldAccessorsInitialized(Hello.HelloCmd.class, Hello.HelloCmd.Builder.class);
 		}
 
 		private int bitField0_;
@@ -256,7 +255,7 @@ public final class Hello {
 		}
 
 		public static Hello.HelloCmd parseFrom(java.nio.ByteBuffer data,
-                                               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
 				throws com.google.protobuf.InvalidProtocolBufferException {
 			return PARSER.parseFrom(data, extensionRegistry);
 		}
@@ -267,50 +266,45 @@ public final class Hello {
 		}
 
 		public static Hello.HelloCmd parseFrom(com.google.protobuf.ByteString data,
-                                               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
 				throws com.google.protobuf.InvalidProtocolBufferException {
 			return PARSER.parseFrom(data, extensionRegistry);
 		}
 
-		public static Hello.HelloCmd parseFrom(byte[] data)
-				throws com.google.protobuf.InvalidProtocolBufferException {
+		public static Hello.HelloCmd parseFrom(byte[] data) throws com.google.protobuf.InvalidProtocolBufferException {
 			return PARSER.parseFrom(data);
 		}
 
-		public static Hello.HelloCmd parseFrom(byte[] data,
-                                               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+		public static Hello.HelloCmd parseFrom(byte[] data, com.google.protobuf.ExtensionRegistryLite extensionRegistry)
 				throws com.google.protobuf.InvalidProtocolBufferException {
 			return PARSER.parseFrom(data, extensionRegistry);
 		}
 
-		public static Hello.HelloCmd parseFrom(java.io.InputStream input)
-				throws java.io.IOException {
+		public static Hello.HelloCmd parseFrom(java.io.InputStream input) throws java.io.IOException {
 			return com.google.protobuf.GeneratedMessageV3.parseWithIOException(PARSER, input);
 		}
 
 		public static Hello.HelloCmd parseFrom(java.io.InputStream input,
-                                               com.google.protobuf.ExtensionRegistryLite extensionRegistry) throws java.io.IOException {
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry) throws java.io.IOException {
 			return com.google.protobuf.GeneratedMessageV3.parseWithIOException(PARSER, input, extensionRegistry);
 		}
 
-		public static Hello.HelloCmd parseDelimitedFrom(java.io.InputStream input)
-				throws java.io.IOException {
+		public static Hello.HelloCmd parseDelimitedFrom(java.io.InputStream input) throws java.io.IOException {
 			return com.google.protobuf.GeneratedMessageV3.parseDelimitedWithIOException(PARSER, input);
 		}
 
 		public static Hello.HelloCmd parseDelimitedFrom(java.io.InputStream input,
-                                                        com.google.protobuf.ExtensionRegistryLite extensionRegistry) throws java.io.IOException {
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry) throws java.io.IOException {
 			return com.google.protobuf.GeneratedMessageV3.parseDelimitedWithIOException(PARSER, input,
 					extensionRegistry);
 		}
 
-		public static Hello.HelloCmd parseFrom(com.google.protobuf.CodedInputStream input)
-				throws java.io.IOException {
+		public static Hello.HelloCmd parseFrom(com.google.protobuf.CodedInputStream input) throws java.io.IOException {
 			return com.google.protobuf.GeneratedMessageV3.parseWithIOException(PARSER, input);
 		}
 
 		public static Hello.HelloCmd parseFrom(com.google.protobuf.CodedInputStream input,
-                                               com.google.protobuf.ExtensionRegistryLite extensionRegistry) throws java.io.IOException {
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry) throws java.io.IOException {
 			return com.google.protobuf.GeneratedMessageV3.parseWithIOException(PARSER, input, extensionRegistry);
 		}
 
@@ -349,8 +343,7 @@ public final class Hello {
 
 			protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable internalGetFieldAccessorTable() {
 				return Hello.internal_static_HelloCmd_fieldAccessorTable
-						.ensureFieldAccessorsInitialized(Hello.HelloCmd.class,
-								Hello.HelloCmd.Builder.class);
+						.ensureFieldAccessorsInitialized(Hello.HelloCmd.class, Hello.HelloCmd.Builder.class);
 			}
 
 			// Construct using
@@ -731,8 +724,7 @@ public final class Hello {
 
 		protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable internalGetFieldAccessorTable() {
 			return Hello.internal_static_HelloEvent_fieldAccessorTable
-					.ensureFieldAccessorsInitialized(Hello.HelloEvent.class,
-							Hello.HelloEvent.Builder.class);
+					.ensureFieldAccessorsInitialized(Hello.HelloEvent.class, Hello.HelloEvent.Builder.class);
 		}
 
 		private int bitField0_;
@@ -868,7 +860,7 @@ public final class Hello {
 		}
 
 		public static Hello.HelloEvent parseFrom(java.nio.ByteBuffer data,
-                                                 com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
 				throws com.google.protobuf.InvalidProtocolBufferException {
 			return PARSER.parseFrom(data, extensionRegistry);
 		}
@@ -879,7 +871,7 @@ public final class Hello {
 		}
 
 		public static Hello.HelloEvent parseFrom(com.google.protobuf.ByteString data,
-                                                 com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
 				throws com.google.protobuf.InvalidProtocolBufferException {
 			return PARSER.parseFrom(data, extensionRegistry);
 		}
@@ -890,28 +882,26 @@ public final class Hello {
 		}
 
 		public static Hello.HelloEvent parseFrom(byte[] data,
-                                                 com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
 				throws com.google.protobuf.InvalidProtocolBufferException {
 			return PARSER.parseFrom(data, extensionRegistry);
 		}
 
-		public static Hello.HelloEvent parseFrom(java.io.InputStream input)
-				throws java.io.IOException {
+		public static Hello.HelloEvent parseFrom(java.io.InputStream input) throws java.io.IOException {
 			return com.google.protobuf.GeneratedMessageV3.parseWithIOException(PARSER, input);
 		}
 
 		public static Hello.HelloEvent parseFrom(java.io.InputStream input,
-                                                 com.google.protobuf.ExtensionRegistryLite extensionRegistry) throws java.io.IOException {
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry) throws java.io.IOException {
 			return com.google.protobuf.GeneratedMessageV3.parseWithIOException(PARSER, input, extensionRegistry);
 		}
 
-		public static Hello.HelloEvent parseDelimitedFrom(java.io.InputStream input)
-				throws java.io.IOException {
+		public static Hello.HelloEvent parseDelimitedFrom(java.io.InputStream input) throws java.io.IOException {
 			return com.google.protobuf.GeneratedMessageV3.parseDelimitedWithIOException(PARSER, input);
 		}
 
 		public static Hello.HelloEvent parseDelimitedFrom(java.io.InputStream input,
-                                                          com.google.protobuf.ExtensionRegistryLite extensionRegistry) throws java.io.IOException {
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry) throws java.io.IOException {
 			return com.google.protobuf.GeneratedMessageV3.parseDelimitedWithIOException(PARSER, input,
 					extensionRegistry);
 		}
@@ -922,7 +912,7 @@ public final class Hello {
 		}
 
 		public static Hello.HelloEvent parseFrom(com.google.protobuf.CodedInputStream input,
-                                                 com.google.protobuf.ExtensionRegistryLite extensionRegistry) throws java.io.IOException {
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry) throws java.io.IOException {
 			return com.google.protobuf.GeneratedMessageV3.parseWithIOException(PARSER, input, extensionRegistry);
 		}
 
@@ -961,8 +951,7 @@ public final class Hello {
 
 			protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable internalGetFieldAccessorTable() {
 				return Hello.internal_static_HelloEvent_fieldAccessorTable
-						.ensureFieldAccessorsInitialized(Hello.HelloEvent.class,
-								Hello.HelloEvent.Builder.class);
+						.ensureFieldAccessorsInitialized(Hello.HelloEvent.class, Hello.HelloEvent.Builder.class);
 			}
 
 			// Construct using

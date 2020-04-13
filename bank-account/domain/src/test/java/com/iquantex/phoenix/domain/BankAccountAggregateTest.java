@@ -1,8 +1,7 @@
 package com.iquantex.phoenix.domain;
 
-import com.iquantex.phoenix.coreapi.AccountAllocateCmd;
-import com.iquantex.phoenix.coreapi.AccountAllocateFailEvent;
-import com.iquantex.phoenix.coreapi.AccountAllocateOkEvent;
+import com.iquantex.samples.account.coreapi.AccountAllocateCmd;
+import com.iquantex.samples.account.coreapi.AccountAllocateFailEvent;
 import com.iquantex.phoenix.server.test.util.EntityAggregateFixture;
 import org.junit.Test;
 

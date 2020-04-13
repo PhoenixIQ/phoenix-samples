@@ -1,10 +1,10 @@
-package com.iquantex.phoenix.controller;
+package com.iquantex.account.controller;
 
-import com.iquantex.phoenix.utils.RateLimiter;
+import com.iquantex.account.utils.RateLimiter;
 import com.iquantex.phoenix.client.PhoenixClient;
 import com.iquantex.phoenix.client.RpcResult;
-import com.iquantex.phoenix.coreapi.AccountAllocateCmd;
-import com.iquantex.phoenix.domain.entity.BankAccountAggregate;
+import com.iquantex.samples.account.coreapi.AccountAllocateCmd;
+import com.iquantex.samples.account.domain.BankAccountAggregate;
 import com.iquantex.phoenix.server.controller.AggregateController;
 import com.iquantex.phoenix.server.eventsourcing.AggregateRepository;
 import lombok.extern.slf4j.Slf4j;

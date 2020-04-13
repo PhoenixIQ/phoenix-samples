@@ -1,4 +1,4 @@
-package com.iquantex.phoenix.utils;
+package com.iquantex.account.utils;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

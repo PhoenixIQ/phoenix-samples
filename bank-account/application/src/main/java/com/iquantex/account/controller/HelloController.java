@@ -1,6 +1,6 @@
-package com.iquantex.phoenix.controller;
+package com.iquantex.account.controller;
 
-import com.iquantex.phoenix.coreapi.Hello;
+import com.iquantex.samples.account.coreapi.Hello;
 import com.iquantex.phoenix.client.PhoenixClient;
 import com.iquantex.phoenix.client.RpcResult;
 import lombok.extern.slf4j.Slf4j;
