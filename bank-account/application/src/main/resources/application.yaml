@@ -22,9 +22,9 @@ spring.h2:
 quantex:
   phoenix:
     routers:
-      - message: com.iquantex.phoenix.coreapi.Hello$HelloCmd
+      - message: com.iquantex.samples.account.coreapi.Hello$HelloCmd
         dst: bank-account/EA/Hello
-      - message: com.iquantex.phoenix.coreapi.AccountAllocateCmd
+      - message: com.iquantex.samples.account.coreapi.AccountAllocateCmd
         dst: bank-account/EA/BankAccount
     server:
       name: ${spring.application.name}
