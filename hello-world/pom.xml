@@ -3,12 +3,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.example</groupId>
+        <groupId>com.iquantex.samples</groupId>
         <artifactId>phoenix-samples</artifactId>
         <version>${revision}</version>
+        <relativePath>../</relativePath>
     </parent>
 
-    <groupId>com.example</groupId>
     <artifactId>hello-world</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
@@ -18,17 +18,17 @@
 
             <!--sub modules-->
             <dependency>
-                <groupId>com.example</groupId>
+                <groupId>com.iquantex.samples</groupId>
                 <artifactId>hello-world.coreapi</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>com.example</groupId>
+                <groupId>com.iquantex.samples</groupId>
                 <artifactId>hello-world.application</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>com.example</groupId>
+                <groupId>com.iquantex.samples</groupId>
                 <artifactId>hello-world.domain</artifactId>
                 <version>${revision}</version>
             </dependency>

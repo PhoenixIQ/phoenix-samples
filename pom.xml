@@ -8,7 +8,7 @@
         <version>2.0.1.RELEASE</version>
     </parent>
 
-    <groupId>com.example</groupId>
+    <groupId>com.iquantex.samples</groupId>
     <artifactId>phoenix-samples</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
