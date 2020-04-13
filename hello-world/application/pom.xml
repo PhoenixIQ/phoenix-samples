@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.example</groupId>
+        <groupId>com.iquantex.samples</groupId>
         <artifactId>hello-world</artifactId>
         <version>${revision}</version>
     </parent>
@@ -26,11 +26,11 @@
 
         <!--内部依赖-->
         <dependency>
-            <groupId>com.example</groupId>
+            <groupId>com.iquantex.samples</groupId>
             <artifactId>hello-world.domain</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.example</groupId>
+            <groupId>com.iquantex.samples</groupId>
             <artifactId>hello-world.coreapi</artifactId>
         </dependency>
 
@@ -55,7 +55,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <skip>false</skip>
-                    <mainClass>com.example.HelloWorldApplication</mainClass>
+                    <mainClass>com.iquantex.samples.helloworld.HelloWorldApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>

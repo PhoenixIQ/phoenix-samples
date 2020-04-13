@@ -3,12 +3,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.example</groupId>
+        <groupId>com.iquantex.samples</groupId>
         <artifactId>phoenix-samples</artifactId>
         <version>${revision}</version>
+        <relativePath>../</relativePath>
     </parent>
 
-    <groupId>com.iquantex.shoppingcart</groupId>
     <artifactId>shopping-cart</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
@@ -18,17 +18,17 @@
 
             <!--sub modules-->
             <dependency>
-                <groupId>com.iquantex.shoppingcart</groupId>
+                <groupId>com.iquantex.samples</groupId>
                 <artifactId>shopping-cart.coreapi</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>com.iquantex.shoppingcart</groupId>
+                <groupId>com.iquantex.samples</groupId>
                 <artifactId>shopping-cart.application</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>com.iquantex.shoppingcart</groupId>
+                <groupId>com.iquantex.samples</groupId>
                 <artifactId>shopping-cart.domain</artifactId>
                 <version>${revision}</version>
             </dependency>
@@ -81,21 +81,6 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
-            </plugin>
-            <!--代码格式化插件-->
-            <plugin>
-                <groupId>io.spring.javaformat</groupId>
-                <artifactId>spring-javaformat-maven-plugin</artifactId>
-                <version>0.0.15</version>
-                <executions>
-                    <execution>
-                        <phase>validate</phase>
-                        <inherited>true</inherited>
-                        <goals>
-                            <goal>validate</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

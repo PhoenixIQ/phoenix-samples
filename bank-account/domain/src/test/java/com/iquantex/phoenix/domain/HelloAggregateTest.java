@@ -1,7 +1,7 @@
 package com.iquantex.phoenix.domain;
 
-import com.iquantex.phoenix.coreapi.Hello;
-import com.iquantex.phoenix.domain.entity.HelloAggregate;
+import com.iquantex.samples.account.coreapi.Hello;
+import com.iquantex.samples.account.domain.HelloAggregate;
 import com.iquantex.phoenix.server.test.util.EntityAggregateFixture;
 import org.junit.Assert;
 import org.junit.Test;

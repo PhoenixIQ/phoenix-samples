@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.iquantex.shoppingcart</groupId>
+        <groupId>com.iquantex.samples</groupId>
         <artifactId>shopping-cart</artifactId>
         <version>${revision}</version>
     </parent>
@@ -26,11 +26,11 @@
 
         <!--内部依赖-->
         <dependency>
-            <groupId>com.iquantex.shoppingcart</groupId>
+            <groupId>com.iquantex.samples</groupId>
             <artifactId>shopping-cart.domain</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.iquantex.shoppingcart</groupId>
+            <groupId>com.iquantex.samples</groupId>
             <artifactId>shopping-cart.coreapi</artifactId>
         </dependency>
 

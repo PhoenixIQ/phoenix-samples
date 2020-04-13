@@ -8,7 +8,7 @@
         <version>2.0.1.RELEASE</version>
     </parent>
 
-    <groupId>com.example</groupId>
+    <groupId>com.iquantex.samples</groupId>
     <artifactId>phoenix-samples</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
@@ -46,5 +46,25 @@
             <layout>default</layout>
         </repository>
     </repositories>
+
+    <build>
+        <plugins>
+            <!--代码格式化插件-->
+            <plugin>
+                <groupId>io.spring.javaformat</groupId>
+                <artifactId>spring-javaformat-maven-plugin</artifactId>
+                <version>0.0.15</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <inherited>true</inherited>
+                        <goals>
+                            <goal>validate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
