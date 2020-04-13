@@ -22,7 +22,7 @@ spring.h2:
 quantex:
   phoenix:
     routers:
-      - message: com.example.coreapi.Hello$HelloCmd
+      - message: com.iquantex.samples.helloworld.coreapi.Hello$HelloCmd
         dst: helloworld/EA/Hello
     server:
       name: ${spring.application.name}
