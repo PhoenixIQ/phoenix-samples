@@ -55,7 +55,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <skip>false</skip>
-                    <mainClass>com.example.HelloWorldApplication</mainClass>
+                    <mainClass>com.iquantex.samples.helloworld.HelloWorldApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>

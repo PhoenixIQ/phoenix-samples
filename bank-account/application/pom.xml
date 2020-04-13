@@ -65,7 +65,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <skip>false</skip>
-                    <mainClass>com.iquantex.phoenix.application.BankAccountApplication</mainClass>
+                    <mainClass>com.iquantex.phoenix.BankAccountApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
