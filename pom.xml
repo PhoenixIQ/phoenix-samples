@@ -20,7 +20,7 @@
 
         <!--组件版本-->
         <revision>1.0-SNAPSHOT</revision>
-        <phoenix.version>dev-SNAPSHOT</phoenix.version>
+        <phoenix.version>2.1.3</phoenix.version>
         <swagger2.version>2.6.1</swagger2.version>
         <lombook.version>1.16.20</lombook.version>
         <proto.version>3.4.0</proto.version>
