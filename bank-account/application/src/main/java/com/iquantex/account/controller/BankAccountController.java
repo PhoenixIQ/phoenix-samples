@@ -1,12 +1,13 @@
 package com.iquantex.account.controller;
 
+import com.iquantex.account.repository.AccountStoreRepository;
 import com.iquantex.account.utils.RateLimiter;
 import com.iquantex.phoenix.client.PhoenixClient;
 import com.iquantex.phoenix.client.RpcResult;
+import com.iquantex.phoenix.server.controller.AggregateController;
+import com.iquantex.phoenix.server.eventsourcing.AggregateManager;
 import com.iquantex.samples.account.coreapi.AccountAllocateCmd;
 import com.iquantex.samples.account.domain.BankAccountAggregate;
-import com.iquantex.phoenix.server.controller.AggregateController;
-import com.iquantex.phoenix.server.eventsourcing.AggregateRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -34,31 +35,29 @@ public class BankAccountController extends AggregateController {
 	@Autowired
 	private PhoenixClient client;
 
+	@Autowired
+	private AccountStoreRepository accountStoreRepository;
+
 	/**
 	 * 账户总览
 	 * @return 账户信息
 	 */
 	@GetMapping("")
 	public String accounts() {
-		int pageIndex = 1;
-		int pageSize = 1000;
 		List<BankAccountAggregate> aggList = new ArrayList<>();
-		while (true) {
-			// 查询聚合根列表
-			List<String> tmpList = AggregateRepository.getInstance()
-					.getAggregateIdListByAggregateRootType("BankAccount", pageIndex, pageSize);
-			log.info("select all aggregate:{}", tmpList);
-			if (tmpList.isEmpty()) {
-				break;
-			}
-			// 组装账户信息
-			for (String aggId : tmpList) {
-				BankAccountAggregate aggregate = (BankAccountAggregate) AggregateRepository.getInstance().load(aggId)
-						.getAggregateRoot();
-				aggregate.setAccount(aggId);
-				aggList.add(aggregate);
-			}
-			pageIndex++;
+		// 查询聚合根列表
+		List<String> tmpList = new ArrayList<>();
+		accountStoreRepository.findAll().forEach(accountStore -> {
+			tmpList.add("EA@BankAccount@" + accountStore.getAccountCode());
+		});
+
+		log.info("select all aggregate:{}", tmpList);
+		// 组装账户信息
+		for (String aggId : tmpList) {
+			BankAccountAggregate aggregate = (BankAccountAggregate) AggregateManager.eventSourcing(aggId)
+					.getAggregateRoot();
+			aggregate.setAccount(aggId);
+			aggList.add(aggregate);
 		}
 		return showAsHTML(aggList);
 	}

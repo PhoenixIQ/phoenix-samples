@@ -2,6 +2,20 @@
 spring:
   application:
     name: bank-account
+  datasource:
+    url: jdbc:h2:file:./data/test;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS PUBLIC
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  kafka:
+    bootstrap-servers: localhost:9092
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: false
 
 # web config
 server:
@@ -44,6 +58,22 @@ quantex:
       mq:
         type: kafka
         address: embedded
+    event-publish:
+      enabled: true
+      manager-driver: org.h2.Driver
+      manager-data-source:
+        url: jdbc:h2:file:./data/test;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS PUBLIC
+        username: sa
+        password:
+      mq-address: embedded
+      mq-type: kafka
+      batch-size: 32
+      buffer-queue-size: 32
+      tasks:
+        - name: bank-account-event-pub
+          subscription:
+            - BankAccount
+          target-topic: bank-account-event-pub
 
 # eureka  config
 service-center:

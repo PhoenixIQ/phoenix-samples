@@ -45,7 +45,11 @@
                 <artifactId>phoenix-client-starter</artifactId>
                 <version>${phoenix.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.iquantex</groupId>
+                <artifactId>phoenix-event-publish-starter</artifactId>
+                <version>${phoenix.version}</version>
+            </dependency>
             <!--tools-->
             <dependency>
                 <groupId>org.projectlombok</groupId>
