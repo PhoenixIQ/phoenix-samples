@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class BankAccountController extends AggregateController {
 
 	@Autowired
-	BankAccountService bankAccountService;
+	private BankAccountService bankAccountService;
 
 	/**
 	 * 账户总览
