@@ -17,15 +17,15 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.iquantex</groupId>
-            <artifactId>phoenix-event-publish-starter</artifactId>
-        </dependency>
 
         <!--phoenix-->
         <dependency>
             <groupId>com.iquantex</groupId>
             <artifactId>phoenix-client-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.iquantex</groupId>
+            <artifactId>phoenix-event-publish-starter</artifactId>
         </dependency>
 
         <!--内部依赖-->
@@ -38,16 +38,7 @@
             <artifactId>bank-account.coreapi</artifactId>
         </dependency>
 
-        <!--swagger2-->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-        </dependency>
-
+        <!--data-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>

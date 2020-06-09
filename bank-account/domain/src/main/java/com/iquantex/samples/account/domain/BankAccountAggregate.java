@@ -1,12 +1,15 @@
 package com.iquantex.samples.account.domain;
 
-import com.iquantex.samples.account.coreapi.AccountAllocateCmd;
-import com.iquantex.samples.account.coreapi.AccountAllocateFailEvent;
-import com.iquantex.samples.account.coreapi.AccountAllocateOkEvent;
+import com.iquantex.phoenix.server.aggregate.entity.QueryHandler;
+import com.iquantex.samples.account.coreapi.command.AccountAllocateCmd;
+import com.iquantex.samples.account.coreapi.command.AccountQueryCmd;
+import com.iquantex.samples.account.coreapi.event.AccountAllocateFailEvent;
+import com.iquantex.samples.account.coreapi.event.AccountAllocateOkEvent;
 import com.iquantex.phoenix.server.aggregate.entity.CommandHandler;
 import com.iquantex.phoenix.server.aggregate.entity.EntityAggregateAnnotation;
 import com.iquantex.phoenix.server.aggregate.model.ActReturn;
 import com.iquantex.phoenix.server.aggregate.model.RetCode;
+import com.iquantex.samples.account.coreapi.event.AccountQueryEvent;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,21 +28,20 @@ public class BankAccountAggregate implements Serializable {
 
 	private static final long serialVersionUID = -1L;
 
-	// 核心业务数据
-	private String account; // 账户代码
+	/** 账户编码 */
+	private String account;
 
-	private double balanceAmt; // 账户余额
+	/** 账户余额 初始1000 */
+	private double balanceAmt = 1000;
 
-	// 辅助统计数据
-	private int successTransferOut; // 成功转出次数
+	/** 成功转出次数 */
+	private int successTransferOut;
 
-	private int failTransferOut; // 失败转出次数
+	/** 失败转出次数 */
+	private int failTransferOut;
 
-	private int successTransferIn; // 成功转入次数
-
-	public BankAccountAggregate() {
-		this.balanceAmt = 1000;
-	}
+	/** 成功转入次数 */
+	private int successTransferIn;
 
 	/**
 	 * 处理账户划拨命令
@@ -63,16 +65,29 @@ public class BankAccountAggregate implements Serializable {
 	}
 
 	/**
+	 * 处理查询命令
+	 * @param cmd
+	 * @return
+	 */
+	@QueryHandler(aggregateRootId = "accountCode")
+	public ActReturn act(AccountQueryCmd cmd) {
+		return ActReturn.builder().retCode(RetCode.SUCCESS).retMessage("查询成功").event(
+				new AccountQueryEvent(account, balanceAmt, successTransferOut, failTransferOut, successTransferIn))
+				.build();
+	}
+
+	/**
 	 * 处理账户划拨成功事件
 	 * @param event 划拨成功事件
 	 */
 	public void on(AccountAllocateOkEvent event) {
-		balanceAmt += event.getAmt();
+		this.account = event.getAccountCode();
+		this.balanceAmt += event.getAmt();
 		if (event.getAmt() < 0) {
-			successTransferOut++;
+			this.successTransferOut++;
 		}
 		else {
-			successTransferIn++;
+			this.successTransferIn++;
 		}
 	}
 
@@ -81,6 +96,7 @@ public class BankAccountAggregate implements Serializable {
 	 * @param event 划拨失败事件
 	 */
 	public void on(AccountAllocateFailEvent event) {
+		this.account = event.getAccountCode();
 		failTransferOut++;
 	}
 

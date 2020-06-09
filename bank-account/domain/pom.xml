@@ -25,7 +25,7 @@
         </dependency>
         <dependency>
             <groupId>com.iquantex</groupId>
-            <artifactId>phoenix-client-starter</artifactId>
+            <artifactId>phoenix-transaction</artifactId>
         </dependency>
     </dependencies>
 

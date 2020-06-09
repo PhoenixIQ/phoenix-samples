@@ -1,6 +1,6 @@
-package com.iquantex.account.bean;
+package com.iquantex.account.config;
 
-import com.iquantex.account.listener.BankAccountEventListener;
+import com.iquantex.account.subscribe.BankAccountEventListener;
 import com.iquantex.phoenix.starter.autoconfigrue.properties.PhoenixEventPublishProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
