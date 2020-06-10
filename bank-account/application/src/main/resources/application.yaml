@@ -9,13 +9,17 @@ spring:
     driver-class-name: org.h2.Driver
   kafka:
     bootstrap-servers: localhost:9092
+    producer:
+      batch-size: 1000
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
   jpa:
     hibernate:
       ddl-auto: update
       naming:
         physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    show-sql: false
+    show-sql: true
 
 # web config
 server:
@@ -36,10 +40,10 @@ spring.h2:
 quantex:
   phoenix:
     routers:
-      - message: com.iquantex.samples.account.coreapi.Hello$HelloCmd
-        dst: bank-account/EA/Hello
-      - message: com.iquantex.samples.account.coreapi.AccountAllocateCmd
-        dst: bank-account/EA/BankAccount
+      - message: com.iquantex.samples.account.coreapi.command.AccountAllocateCmd
+        dst: ${spring.application.name}/EA/BankAccount
+      - message: com.iquantex.samples.account.coreapi.command.AccountQueryCmd
+        dst: ${spring.application.name}/EA/BankAccount
     server:
       name: ${spring.application.name}
       mq:
@@ -47,6 +51,8 @@ quantex:
         address: embedded
         subscribes:
           - topic: bank-account
+          - topic: upper-topic
+            deserializer: com.iquantex.account.subscribe.TransactionEventSubscribe
       event-store:
         driver-class-name: org.h2.Driver
         data-sources:
@@ -75,7 +81,7 @@ quantex:
             - BankAccount
           target-topic: bank-account-event-pub
 
-# eureka  config
+# eureka config
 service-center:
   url: localhost:7070
 eureka:
@@ -88,3 +94,5 @@ eureka:
   instance:
     prefer-ip-address: true
     appname: ${spring.application.name}
+    metadata-map:
+      phoenixEnabled: true

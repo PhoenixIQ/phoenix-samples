@@ -36,10 +36,12 @@
 <div id="a">
     <div id="a1">
         <p class="title"><b>账户总览</b></p>
-        自动刷新：
-        开<input type="radio" name="refreshRadio" value="open">
-        关<input type="radio" name="refreshRadio" value="close" checked>
-        <button style="text-align: right" onclick="getHtmlTable()">刷新</button>
+        最终一致性读: <input type="radio" name="readRadio" value="0"> <br/>
+        线性一致性读: <input type="radio" name="readRadio" value="1" checked> <br/>
+        <div class="formDiv">
+            <button style="text-align: right; width: 40px" onclick="getHtmlTable()">刷新</button>
+        </div>
+
         <br/><br/>
     </div>
     <br/><br/>
@@ -69,6 +71,19 @@
         </form>
     </div>
 
+    <div id="a4">
+        <p class="title"><b>定向转账</b></p>
+        <form name="directTransForm" action="">
+            转出账户：<input type="text" name="outAccount"><br/>
+            转入账户：<input type="text" name="inAccount"><br/>
+            转账金额：<input type="text" name="amt"><br/>
+            <div class="formDiv">
+                <button id="directTransButton" type="button" style="width: 40px" onclick="directTrans()">发送</button>
+            </div>
+        </form>
+    </div>
+    <br/><br/>
+
 </div>
 <br/><br/>
 
@@ -80,31 +95,9 @@
 <script src="jq/jquery.js"></script>
 <script type="text/javascript">
 
-    var dt;
-
-    window.onload = stopInterval();
-
-    $('input:radio[name="refreshRadio"]').click(function () {
-        var checkValue = $('input:radio[name="refreshRadio"]:checked').val();
-        if (checkValue == "open") {
-            openInterval();
-        } else {
-            stopInterval();
-        }
-    });
-
-    function openInterval() {
-        dt = setInterval(function () {
-            getHtmlTable()
-        }, 2000);
-    }
-
-    function stopInterval() {
-        clearInterval(dt)
-    }
-
     function getHtmlTable() {
-        axios.get("/accounts")
+        var read = $('input:radio[name="readRadio"]:checked').val();
+        axios.get("/accounts/" + read)
             .then(function (response) {
                 console.log(response.data);
                 $("#b").html(response.data);
@@ -125,6 +118,16 @@
         var account = directAllocateForm.inAccount.value;
         var amt = directAllocateForm.amt.value;
         axios.put("/accounts/allocate/" + account + "/" + amt)
+            .then(function (response) {
+                alert(response.data)
+            })
+    }
+
+    function directTrans() {
+        var outAccountCode = directTransForm.outAccount.value;
+        var inAccountCode = directTransForm.inAccount.value;
+        var amt = directTransForm.amt.value;
+        axios.put("/accounts/transfers/" + outAccountCode + "/" + inAccountCode + "/" + amt)
             .then(function (response) {
                 alert(response.data)
             })

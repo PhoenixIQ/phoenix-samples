@@ -42,6 +42,11 @@
             </dependency>
             <dependency>
                 <groupId>com.iquantex</groupId>
+                <artifactId>phoenix-transaction</artifactId>
+                <version>${phoenix.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.iquantex</groupId>
                 <artifactId>phoenix-client-starter</artifactId>
                 <version>${phoenix.version}</version>
             </dependency>
@@ -50,6 +55,7 @@
                 <artifactId>phoenix-event-publish-starter</artifactId>
                 <version>${phoenix.version}</version>
             </dependency>
+
             <!--tools-->
             <dependency>
                 <groupId>org.projectlombok</groupId>
@@ -60,16 +66,6 @@
                 <groupId>com.google.protobuf</groupId>
                 <artifactId>protobuf-java</artifactId>
                 <version>${proto.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger2</artifactId>
-                <version>${swagger2.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger-ui</artifactId>
-                <version>${swagger2.version}</version>
             </dependency>
 
         </dependencies>

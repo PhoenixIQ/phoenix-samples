@@ -1,4 +1,4 @@
-package com.iquantex.account.listener;
+package com.iquantex.account.subscribe;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.iquantex.account.model.AccountStore;
@@ -7,7 +7,8 @@ import com.iquantex.phoenix.eventpublish.core.EventDeserializer;
 import com.iquantex.phoenix.eventpublish.deserializer.DefaultMessageDeserializer;
 import com.iquantex.phoenix.server.aggregate.DomainEvent;
 import com.iquantex.phoenix.server.message.Message;
-import com.iquantex.samples.account.coreapi.AccountAllocateOkEvent;
+import com.iquantex.samples.account.coreapi.event.AccountAllocateFailEvent;
+import com.iquantex.samples.account.coreapi.event.AccountAllocateOkEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.kafka.support.Acknowledgment;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 public class BankAccountEventListener implements BatchAcknowledgingMessageListener<String, byte[]> {
@@ -25,11 +27,11 @@ public class BankAccountEventListener implements BatchAcknowledgingMessageListen
 	@Autowired
 	private AccountStoreRepository accountStoreRepository;
 
-	private EventDeserializer<byte[], Message> deserializer = new DefaultMessageDeserializer();
+	/** phoenix序列化工具 */
+	private final EventDeserializer<byte[], Message> deserializer = new DefaultMessageDeserializer();
 
-	private Map<String/* AggregateId */, Long> lastEventVersion = new HashMap<>();
-
-	private long eventCounter = 0;
+	/** 版本校验集合 */
+	private final Map<String/* AggregateId */, Long> lastEventVersion = new HashMap<>();
 
 	@Override
 	@KafkaListener(topics = "bank-account-event-pub")
@@ -43,15 +45,31 @@ public class BankAccountEventListener implements BatchAcknowledgingMessageListen
 
 	private void tryAddNewAccount(byte[] eventBytes) {
 		try {
+
 			Message eventMsg = deserializer.deserialize(eventBytes);
-			eventCounter++;
 			if (eventMsg.getPayload() instanceof AccountAllocateOkEvent) {
-				String accountCode = ((AccountAllocateOkEvent) eventMsg.getPayload()).getAccountCode();
-				accountStoreRepository.save(new AccountStore(accountCode));
-				log.info("added new account code<{}> into account store", accountCode);
+				AccountAllocateOkEvent accountAllocateOkEvent = eventMsg.getPayload();
+				AccountStore accountStore = accountStoreRepository.findById(accountAllocateOkEvent.getAccountCode())
+						.orElse(new AccountStore(accountAllocateOkEvent.getAccountCode(), 1000, 0, 0, 0));
+				accountStore.setBalanceAmt(accountStore.getBalanceAmt() + accountAllocateOkEvent.getAmt());
+				if (accountAllocateOkEvent.getAmt() < 0) {
+					accountStore.setSuccessTransferOut(accountStore.getSuccessTransferOut() + 1);
+				}
+				else {
+					accountStore.setSuccessTransferIn(accountStore.getSuccessTransferIn() + 1);
+				}
+				accountStoreRepository.save(accountStore);
+				log.info("handle message<{}>", accountAllocateOkEvent);
 			}
-			log.debug("get event msg from topic<{}>, className<{}>, cnt<{}>", "bank-account-event-pub",
-					eventMsg.getPayloadClassName(), eventCounter);
+
+			if (eventMsg.getPayload() instanceof AccountAllocateFailEvent) {
+				AccountAllocateFailEvent accountAllocateFailEvent = eventMsg.getPayload();
+				AccountStore accountStore = accountStoreRepository.findById(accountAllocateFailEvent.getAccountCode())
+						.orElse(new AccountStore(accountAllocateFailEvent.getAccountCode(), 1000, 0, 0, 0));
+				accountStore.setFailTransferOut(accountStore.getFailTransferOut() + 1);
+				accountStoreRepository.save(accountStore);
+				log.info("handle message<{}>", accountAllocateFailEvent);
+			}
 		}
 		catch (Exception e) {
 			log.error("handle event error", e);
