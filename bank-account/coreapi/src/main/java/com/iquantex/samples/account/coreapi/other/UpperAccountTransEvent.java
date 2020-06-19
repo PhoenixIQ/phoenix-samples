@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * 模拟上游转账事件
+ *
  * @author baozi
  * @date 2020/5/27 10:38 AM
  */
@@ -23,7 +24,6 @@ public class UpperAccountTransEvent {
 	 * 转入账户
 	 */
 	private String inAccountCode;
-
 
 	/**
 	 * 转入金额(正)

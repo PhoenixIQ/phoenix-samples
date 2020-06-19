@@ -66,9 +66,10 @@ public class BankAccountServiceImpl implements BankAccountService {
 				RpcResult<AccountQueryEvent> rpcResult = null;
 				try {
 					rpcResult = future.get(100, TimeUnit.SECONDS);
-				} catch (Exception e) {
-				    log.error(e.getLocalizedMessage(), e);
-				    return;
+				}
+				catch (Exception e) {
+					log.error(e.getLocalizedMessage(), e);
+					return;
 				}
 				AccountQueryEvent accountQueryEvent = rpcResult.getData();
 				accountQueryEvents.add(accountQueryEvent);

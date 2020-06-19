@@ -8,6 +8,7 @@ import java.io.Serializable;
 
 /**
  * 账户查询命令
+ *
  * @author baozi
  * @date 2020/3/26 8:10 PM
  */

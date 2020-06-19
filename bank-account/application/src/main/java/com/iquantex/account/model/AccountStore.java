@@ -21,19 +21,19 @@ import java.io.Serializable;
 public class AccountStore implements Serializable {
 
 	@Id
-//	@Column(columnDefinition = "comment '账户编码'")
+	// @Column(columnDefinition = "comment '账户编码'")
 	private String accountCode;
 
-//	@Column(columnDefinition = "comment '账户余额'")
+	// @Column(columnDefinition = "comment '账户余额'")
 	private double balanceAmt;
 
-//	@Column(columnDefinition = "comment '成功转出次数'")
+	// @Column(columnDefinition = "comment '成功转出次数'")
 	private int successTransferOut;
 
-//	@Column(columnDefinition = "comment '失败转出次数'")
+	// @Column(columnDefinition = "comment '失败转出次数'")
 	private int failTransferOut;
 
-//	@Column(columnDefinition = "comment '成功转入次数'")
+	// @Column(columnDefinition = "comment '成功转入次数'")
 	private int successTransferIn;
 
 }

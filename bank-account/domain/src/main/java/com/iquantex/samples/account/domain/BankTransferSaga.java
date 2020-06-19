@@ -1,6 +1,5 @@
 package com.iquantex.samples.account.domain;
 
-
 import com.iquantex.phoenix.transaction.aggregate.transaction.SagaAction;
 import com.iquantex.phoenix.transaction.aggregate.transaction.TransactionAggregateAnnotation;
 import com.iquantex.phoenix.transaction.aggregate.transaction.TransactionFinishReturn;
@@ -27,7 +26,7 @@ public class BankTransferSaga implements Serializable {
 	/** 事务返回内容 */
 	private String retMessage = "";
 
-    /** 事务请求命令 */
+	/** 事务请求命令 */
 	private AccountTransferCmd transferCmd;
 
 	/**
@@ -57,8 +56,8 @@ public class BankTransferSaga implements Serializable {
 		// 转出正常,请求转入
 		if (event.getAmt() < 0) {
 			return TransactionReturn.builder()
-					.addAction(
-							new SagaAction(new AccountAllocateCmd(transferCmd.getInAccountCode(), transferCmd.getAmt()), null))
+					.addAction(new SagaAction(
+							new AccountAllocateCmd(transferCmd.getInAccountCode(), transferCmd.getAmt()), null))
 					.build();
 		}
 		// 转入正常,转账结束
