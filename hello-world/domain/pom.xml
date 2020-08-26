@@ -27,6 +27,10 @@
             <groupId>com.iquantex</groupId>
             <artifactId>phoenix-client-starter</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.iquantex</groupId>
+            <artifactId>phoenix-eventstore-jdbc</artifactId>
+        </dependency>
     </dependencies>
 
 
