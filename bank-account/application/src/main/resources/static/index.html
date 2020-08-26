@@ -34,6 +34,7 @@
 </head>
 <body>
 <div id="a">
+
     <div id="a1">
         <p class="title"><b>账户总览</b></p>
         最终一致性读: <input type="radio" name="readRadio" value="0"> <br/>
@@ -47,31 +48,19 @@
     <br/><br/>
 
     <div id="a2">
-        <p class="title"><b>随机划拨</b></p>
-        <form name="batchAllocateForm" action="">
-            划拨总数：<input type="text" name="total"><br/>
-            每秒次数：<input type="text" name="tps"><br/>
-            账户范围：<input type="text" name="aggNum"><br/>
+        <p class="title"><b>随机转账</b></p>
+        <form name="batchTransForm" action="">
+            转账总数：<input type="text" name="total"><br/>
+            每秒次数：<input type="text" name="tps" iv><br/>
+            账户数量：<input type="text" name="aggNum"><br/>
             <div class="formDiv">
-                <button id="batchAllocateButton" type="button" style="width: 40px" onclick="batchAllocate()">发送</button>
+                <button id="batchTransButton" type="button" style="width: 40px" onclick="batchTrans()">发送</button>
             </div>
         </form>
     </div>
     <br/><br/>
 
     <div id="a3">
-        <p class="title"><b>定向划拨</b></p>
-        <form name="directAllocateForm" action="">
-            划拨账户：<input type="text" name="inAccount"><br/>
-            划拨金额：<input type="text" name="amt"><br/>
-            <div class="formDiv">
-                <button id="directAllocateButton" type="button" style="width: 40px" onclick="directAllocate()">发送
-                </button>
-            </div>
-        </form>
-    </div>
-
-    <div id="a4">
         <p class="title"><b>定向转账</b></p>
         <form name="directTransForm" action="">
             转出账户：<input type="text" name="outAccount"><br/>
@@ -84,6 +73,56 @@
     </div>
     <br/><br/>
 
+    <div id="a4">
+        <p class="title"><b>随机划拨</b></p>
+        <form name="batchAllocateForm" action="">
+            划拨总数：<input type="text" name="total"><br/>
+            每秒次数：<input type="text" name="tps"><br/>
+            账户范围：<input type="text" name="aggNum"><br/>
+            <div class="formDiv">
+                <button id="batchAllocateButton" type="button" style="width: 40px" onclick="batchAllocate()">发送</button>
+            </div>
+        </form>
+    </div>
+    <br/><br/>
+
+    <div id="a5">
+        <p class="title"><b>定向划拨</b></p>
+        <form name="directAllocateForm" action="">
+            划拨账户：<input type="text" name="inAccount"><br/>
+            划拨金额：<input type="text" name="amt"><br/>
+            划拨编号：<input type="text" name="allocateNumber">
+            <div class="formDiv">
+                <button id="directAllocateButton" type="button" style="width: 40px" onclick="directAllocate()">发送
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div id="a6">
+        <p class="title"><b>创建账户</b></p>
+        <form name="initAllocateForm" action="">
+            账户代码：<input type="text" name="accountCode"><br/>
+            账户金额：<input type="text" name="amt"><br/>
+            <div class="formDiv">
+                <button id="initAllocateButton" type="button" style="width: 40px" onclick="init()">创建
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div id="a7">
+        <p class="title"><b>批量创建账户</b></p>
+        <form name="batchInitAllocateForm" action="">
+            账户数量：<input type="text" name="aggregateNum"><br/>
+            账户金额：<input type="text" name="amt"><br/>
+            <div class="formDiv">
+                <button id="batchInitAllocateButton" type="button" style="width: 40px" onclick="batchInit()">创建
+                </button>
+            </div>
+        </form>
+    </div>
+
 </div>
 <br/><br/>
 
@@ -95,6 +134,7 @@
 <script src="jq/jquery.js"></script>
 <script type="text/javascript">
 
+    // 账户总览
     function getHtmlTable() {
         var read = $('input:radio[name="readRadio"]:checked').val();
         axios.get("/accounts/" + read)
@@ -104,6 +144,29 @@
             })
     }
 
+    // 随机批量转账
+    function batchTrans() {
+        var total = batchTransForm.total.value;
+        var tps = batchTransForm.tps.value;
+        var aggNum = batchTransForm.aggNum.value;
+        axios.get("/accounts/transfers/pf/" + total + "/" + tps + "/" + aggNum)
+            .then(function (response) {
+                alert(response.data)
+            })
+    }
+
+    // 定向转账
+    function directTrans() {
+        var outAccountCode = directTransForm.outAccount.value;
+        var inAccountCode = directTransForm.inAccount.value;
+        var amt = directTransForm.amt.value;
+        axios.put("/accounts/transfers/" + outAccountCode + "/" + inAccountCode + "/" + amt)
+            .then(function (response) {
+                alert(response.data)
+            })
+    }
+
+    // 随机批量划拨
     function batchAllocate() {
         var total = batchAllocateForm.total.value;
         var tps = batchAllocateForm.tps.value;
@@ -114,20 +177,32 @@
             })
     }
 
+    // 定向划拨
     function directAllocate() {
         var account = directAllocateForm.inAccount.value;
         var amt = directAllocateForm.amt.value;
-        axios.put("/accounts/allocate/" + account + "/" + amt)
+        var allocateNumber = directAllocateForm.allocateNumber.value;
+        axios.put("/accounts/allocate/" + account + "/" + amt + "/" + allocateNumber)
             .then(function (response) {
                 alert(response.data)
             })
     }
 
-    function directTrans() {
-        var outAccountCode = directTransForm.outAccount.value;
-        var inAccountCode = directTransForm.inAccount.value;
-        var amt = directTransForm.amt.value;
-        axios.put("/accounts/transfers/" + outAccountCode + "/" + inAccountCode + "/" + amt)
+    // 创建账户
+    function init() {
+        var accountCode = initAllocateForm.accountCode.value;
+        var amt = initAllocateForm.amt.value;
+        axios.put("/accounts/create/" + accountCode + "/" + amt)
+            .then(function (response) {
+                alert(response.data)
+            })
+    }
+
+    // 批量创建账户
+    function batchInit() {
+        var aggregateNum = batchInitAllocateForm.aggregateNum.value;
+        var amt = batchInitAllocateForm.amt.value;
+        axios.put("/accounts/batch_create/" + aggregateNum + "/" + amt)
             .then(function (response) {
                 alert(response.data)
             })

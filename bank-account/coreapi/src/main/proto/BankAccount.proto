@@ -1,0 +1,25 @@
+//protobuf的版本
+syntax = "proto2";
+
+// 生成类的包路径
+option java_package = "com.iquantex.phoenix.bankaccount.api.protobuf";
+//生成的数据访问类的类名
+option java_outer_classname = "Account";
+
+message AccountCreateCmd {
+
+  // 划拨账户
+  optional string accountCode = 1;
+
+  // 账户余额
+  optional double balanceAmt = 2;
+
+}
+
+message AccountCreateEvent {
+  // 划拨账户
+  optional string accountCode = 1;
+
+  // 账户余额
+  optional double balanceAmt = 2;
+}
