@@ -21,22 +21,12 @@ spring.h2:
 # phoenix
 quantex:
   phoenix:
-    routers:
-      - message: com.iquantex.samples.shoppingcart.coreapi.shopping.ShoppingCartOptionCmd
-        dst: shopping-cart/EA/shoppingcart
-      - message: com.iquantex.samples.shoppingcart.coreapi.inventory.InventoryAllocateCmd
-        dst: shopping-cart/EA/inventory
-      - message: com.iquantex.samples.shoppingcart.coreapi.shopping.ShoppingCartQueryListCmd
-        dst: shopping-cart/EA/shoppingcart
-      - message: com.iquantex.samples.shoppingcart.coreapi.inventory.InventoryItemQueryCmd
-        dst: shopping-cart/EA/inventory
     server:
       name: ${spring.application.name}
       mq:
         type: kafka
-        address: embedded
-        subscribes:
-          - topic: shopping-cart
+        address: 127.0.0.1:9092
+        subscribe-topic: shopping-cart
       event-store:
         driver-class-name: org.h2.Driver
         data-sources:
@@ -47,4 +37,4 @@ quantex:
       name: ${spring.application.name}-client
       mq:
         type: kafka
-        address: embedded
+        address: 127.0.0.1:9092

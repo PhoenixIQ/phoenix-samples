@@ -44,6 +44,11 @@
                 <artifactId>phoenix-client-starter</artifactId>
                 <version>${phoenix.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.iquantex</groupId>
+                <artifactId>phoenix-eventstore-jdbc</artifactId>
+                <version>${phoenix.version}</version>
+            </dependency>
 
             <!--tools-->
             <dependency>

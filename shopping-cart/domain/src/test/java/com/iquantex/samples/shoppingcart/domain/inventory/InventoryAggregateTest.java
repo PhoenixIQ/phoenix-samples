@@ -1,6 +1,6 @@
 package com.iquantex.samples.shoppingcart.domain.inventory;
 
-import com.iquantex.phoenix.server.test.util.EntityAggregateFixture;
+import com.iquantex.phoenix.server.test.EntityAggregateFixture;
 import com.iquantex.samples.shoppingcart.coreapi.inventory.*;
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,9 +10,11 @@ import org.junit.Test;
  */
 public class InventoryAggregateTest {
 
+	private static final String AGGREGATE_PACKAGE = "com.iquantex.samples.shoppingcart.domain";
+
 	@Test
 	public void allocate_success() {
-		EntityAggregateFixture fixture = new EntityAggregateFixture();
+		EntityAggregateFixture fixture = new EntityAggregateFixture(AGGREGATE_PACKAGE);
 		InventoryAllocateCmd cmd = InventoryAllocateCmd.builder().itemId("I001").allocateQty(100).build();
 		// 断言事件
 		fixture.when(cmd).expectRetSuccessCode().expectMessage(InventoryAllocateOkEvent.class);
@@ -22,7 +24,7 @@ public class InventoryAggregateTest {
 
 	@Test
 	public void allocate_fail() {
-		EntityAggregateFixture fixture = new EntityAggregateFixture();
+		EntityAggregateFixture fixture = new EntityAggregateFixture(AGGREGATE_PACKAGE);
 		InventoryAllocateCmd cmd = InventoryAllocateCmd.builder().itemId("I001").allocateQty(-100).build();
 		// 断言事件
 		fixture.when(cmd).expectRetFailCode().expectMessage(InventoryAllocateFailEvent.class);
@@ -32,7 +34,7 @@ public class InventoryAggregateTest {
 
 	@Test
 	public void query_sucess() {
-		EntityAggregateFixture fixture = new EntityAggregateFixture();
+		EntityAggregateFixture fixture = new EntityAggregateFixture(AGGREGATE_PACKAGE);
 		InventoryAllocateCmd cmd = InventoryAllocateCmd.builder().itemId("I001").allocateQty(100).build();
 		fixture.when(cmd).expectRetSuccessCode().expectMessage(InventoryAllocateOkEvent.class);
 
