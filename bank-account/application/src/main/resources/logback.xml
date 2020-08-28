@@ -6,13 +6,13 @@
 
     <!-- log pattern-->
     <property name="APP_CONSOLE"
-              value="${APP_CONSOLE:-%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} [%clr(%-40.40logger{39}){cyan} %clr(%4line)] %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+              value="[%d] [%5level] [%thread] [%-40logger{39}]: %msg%n"/>
     <property name="APP_FILE"
               value="${APP_FILE:-%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] [%-40.40logger{39} %4line] : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
 
     <!-- 基础配置-->
     <property name="LOG_PATH_ROOT" value="${DFOCUS_LOG_ROOT:-./logs}"/>
-    <property name="LOG_APP_NAME" value="${LOG_APP_NAME:-phoenix-risk}"/>
+    <property name="LOG_APP_NAME" value="${LOG_APP_NAME:-bank-account-server}"/>
     <property name="LOG_PATH" value="${LOG_PATH:-${LOG_PATH_ROOT}/${LOG_APP_NAME}}"/>
 
     <!-- 输出到控制台 -->
@@ -47,6 +47,7 @@
         <appender-ref ref="stdout"/>
         <appender-ref ref="fileLog"/>
     </root>
+
     <logger name="com.iquantex" level="info"/>
 
     <!--

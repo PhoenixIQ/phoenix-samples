@@ -44,6 +44,11 @@
                 <artifactId>phoenix-client-starter</artifactId>
                 <version>${phoenix.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.iquantex</groupId>
+                <artifactId>phoenix-eventstore-jdbc</artifactId>
+                <version>${phoenix.version}</version>
+            </dependency>
 
             <!--tools-->
             <dependency>
@@ -56,17 +61,6 @@
                 <artifactId>protobuf-java</artifactId>
                 <version>${proto.version}</version>
             </dependency>
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger2</artifactId>
-                <version>${swagger2.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger-ui</artifactId>
-                <version>${swagger2.version}</version>
-            </dependency>
-
         </dependencies>
     </dependencyManagement>
 

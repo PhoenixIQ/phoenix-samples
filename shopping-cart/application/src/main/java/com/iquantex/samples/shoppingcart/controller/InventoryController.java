@@ -33,7 +33,7 @@ public class InventoryController {
 		InventoryAllocateCmd inventoryAllocateCmd = InventoryAllocateCmd.builder().itemId(itemId)
 				.allocateQty(allocateQty).build();
 
-		Future<RpcResult> future = client.send(inventoryAllocateCmd, UUID.randomUUID().toString());
+		Future<RpcResult> future = client.send(inventoryAllocateCmd, "shopping-cart", UUID.randomUUID().toString());
 		try {
 			RpcResult result = future.get(10, TimeUnit.SECONDS);
 			return result.getMessage();
@@ -47,7 +47,7 @@ public class InventoryController {
 	public String queryBalanceQty(@PathVariable String itemId) {
 		InventoryItemQueryCmd inventoryItemQueryCmd = InventoryItemQueryCmd.builder().itemId(itemId).build();
 
-		Future<RpcResult> future = client.send(inventoryItemQueryCmd, UUID.randomUUID().toString());
+		Future<RpcResult> future = client.send(inventoryItemQueryCmd, "shopping-cart", UUID.randomUUID().toString());
 		try {
 			RpcResult result = future.get(10, TimeUnit.SECONDS);
 			InventoryItemQueryEvent inventoryItemQueryEvent = (InventoryItemQueryEvent) result.getData();

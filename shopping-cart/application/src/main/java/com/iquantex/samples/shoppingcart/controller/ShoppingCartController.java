@@ -33,7 +33,7 @@ public class ShoppingCartController {
 		ShoppingCartOptionCmd shoppingCartOptionCmd = ShoppingCartOptionCmd.builder().userId(userId).itemId(itemId)
 				.qty(qty).build();
 
-		Future<RpcResult> future = client.send(shoppingCartOptionCmd, UUID.randomUUID().toString());
+		Future<RpcResult> future = client.send(shoppingCartOptionCmd, "shopping-cart", UUID.randomUUID().toString());
 		try {
 			RpcResult result = future.get(10, TimeUnit.SECONDS);
 			return result.getMessage();
@@ -47,7 +47,7 @@ public class ShoppingCartController {
 	public String queryShoppingCart(@PathVariable String userId) {
 		ShoppingCartQueryListCmd shoppingCartQueryListCmd = ShoppingCartQueryListCmd.builder().userId(userId).build();
 
-		Future<RpcResult> future = client.send(shoppingCartQueryListCmd, UUID.randomUUID().toString());
+		Future<RpcResult> future = client.send(shoppingCartQueryListCmd, "shopping-cart", UUID.randomUUID().toString());
 		try {
 			RpcResult result = future.get(10, TimeUnit.SECONDS);
 			ShoppingCartQueryListEvent shoppingCartQueryListEvent = (ShoppingCartQueryListEvent) result.getData();

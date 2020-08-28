@@ -21,16 +21,12 @@ spring.h2:
 # phoenix
 quantex:
   phoenix:
-    routers:
-      - message: com.iquantex.samples.helloworld.coreapi.Hello$HelloCmd
-        dst: helloworld/EA/Hello
     server:
       name: ${spring.application.name}
       mq:
         type: kafka
-        address: embedded
-        subscribes:
-          - topic: helloworld
+        address: 127.0.0.1:9092
+        subscribe-topic: helloworld
       event-store:
         driver-class-name: org.h2.Driver
         data-sources:
@@ -41,4 +37,4 @@ quantex:
       name: ${spring.application.name}-client
       mq:
         type: kafka
-        address: embedded
+        address: 127.0.0.1:9092
