@@ -85,7 +85,7 @@ public class BankAccountAggregate implements Serializable {
      * @return
      */
     @CommandHandler(aggregateRootId = "accountCode", enableCreateAggregate = false, idempotentIds = {
-            "AccountAllocateCmd", "accountCode", "allocateNumber" })
+            "AccountAllocateCmd", "accountCode", "allocateNumber" }, isCommandSourcing = true)
     public ActReturn act(AccountAllocateCmd cmd) {
 
         // 模拟处理超时堵塞65s
@@ -95,45 +95,33 @@ public class BankAccountAggregate implements Serializable {
 
         // 模拟调用其他service
         if (!mockService.isPass()) {
+            failTransferOut++;
             String retMessage = "账户划拨失败,请求判定不通过.";
             return ActReturn.builder().retCode(RetCode.FAIL).retMessage(retMessage)
                 .event(new AccountAllocateFailEvent(cmd.getAccountCode(), cmd.getAmt(), retMessage)).build();
         }
 
         if (Math.abs(cmd.getAmt()) < 0.00000001) {
+            failTransferOut++;
             String retMessage = String.format("账户划拨失败,划拨金额不可为0: 账户余额:%f, 划拨金额：%f", balanceAmt, cmd.getAmt());
             return ActReturn.builder().retCode(RetCode.FAIL).retMessage(retMessage)
                 .event(new AccountAllocateFailEvent(cmd.getAccountCode(), cmd.getAmt(), retMessage)).build();
         } else if (balanceAmt + cmd.getAmt() < 0) {
+            failTransferOut++;
             String retMessage = String.format("账户划拨失败,账户余额不足: 账户余额:%f, 划拨金额：%f", balanceAmt, cmd.getAmt());
             return ActReturn.builder().retCode(RetCode.FAIL).retMessage(retMessage)
                 .event(new AccountAllocateFailEvent(cmd.getAccountCode(), cmd.getAmt(), retMessage)).build();
         } else {
+            balanceAmt += cmd.getAmt();
+            if (cmd.getAmt() < 0) {
+                successTransferOut++;
+            } else {
+                successTransferIn++;
+            }
+
             String retMessage = String.format("账户划拨成功：划拨金额：%.2f，账户余额：%.2f", cmd.getAmt(), balanceAmt + cmd.getAmt());
             return ActReturn.builder().retCode(RetCode.SUCCESS).retMessage(retMessage)
                 .event(new AccountAllocateOkEvent(cmd.getAccountCode(), cmd.getAmt())).build();
         }
     }
-
-    /**
-     * 处理账户划拨成功事件
-     * @param event
-     */
-    public void on(AccountAllocateOkEvent event) {
-        balanceAmt += event.getAmt();
-        if (event.getAmt() < 0) {
-            successTransferOut++;
-        } else {
-            successTransferIn++;
-        }
-    }
-
-    /**
-     * 处理账户划拨失败事件
-     * @param event
-     */
-    public void on(AccountAllocateFailEvent event) {
-        failTransferOut++;
-    }
-
 }
