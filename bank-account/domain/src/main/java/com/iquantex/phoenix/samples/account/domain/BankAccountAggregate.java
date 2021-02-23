@@ -46,8 +46,10 @@ public class BankAccountAggregate implements Serializable {
     @Autowired
     private transient MockService mockService;
 
-    @CommandHandler(aggregateRootId = "accountCode")
+    @CommandHandler(aggregateRootId = "accountCode", isCommandSourcing = true)
     public ActReturn act(Account.AccountCreateCmd createCmd) {
+        this.account = createCmd.getAccountCode();
+        this.balanceAmt = createCmd.getBalanceAmt();
 
         String message = String.format("初始化账户代码<%s>, 初始化余额<%s>. ", createCmd.getAccountCode(),
             createCmd.getBalanceAmt());
@@ -59,11 +61,6 @@ public class BankAccountAggregate implements Serializable {
             .event(
                 Account.AccountCreateEvent.newBuilder().setAccountCode(createCmd.getAccountCode())
                     .setBalanceAmt(createCmd.getBalanceAmt()).build()).build();
-    }
-
-    public void on(Account.AccountCreateEvent event) {
-        this.account = event.getAccountCode();
-        this.balanceAmt = event.getBalanceAmt();
     }
 
     /**
