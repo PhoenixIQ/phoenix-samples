@@ -14,9 +14,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class PhoenixAfterRunner implements ApplicationRunner {
 
-    @Override
-    public void run(ApplicationArguments args) {
-        log.info("phoenix started");
-    }
+	@Override
+	public void run(ApplicationArguments args) {
+		log.info("phoenix started");
+	}
 
 }

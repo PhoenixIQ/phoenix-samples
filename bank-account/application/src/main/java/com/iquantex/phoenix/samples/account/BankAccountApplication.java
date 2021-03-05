@@ -13,13 +13,14 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 @SpringBootApplication
 public class BankAccountApplication {
 
-    public static void main(String[] args) {
-        try {
-            SpringApplication.run(BankAccountApplication.class, args);
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-            System.exit(1);
-        }
-    }
+	public static void main(String[] args) {
+		try {
+			SpringApplication.run(BankAccountApplication.class, args);
+		}
+		catch (Exception e) {
+			log.error(e.getMessage(), e);
+			System.exit(1);
+		}
+	}
 
 }

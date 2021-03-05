@@ -15,7 +15,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class AccountQueryCmd implements Serializable {
 
-    /** 账户编码 */
-    private String accountCode;
+	/** 账户编码 */
+	private String accountCode;
 
 }

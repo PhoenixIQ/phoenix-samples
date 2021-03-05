@@ -20,29 +20,31 @@ import com.iquantex.phoenix.server.mq.subscribe.SubscribeMqInfo;
 @Component("WebEventTopicSubscribe")
 public class CreateAccountEventSubscribe implements Subscribe {
 
-    @Value("${create-account-event.mqAddress}")
-    private String mqAddress;
+	@Value("${create-account-event.mqAddress}")
+	private String mqAddress;
 
-    @Value("${create-account-event.topic}")
-    private String topic;
+	@Value("${create-account-event.topic}")
+	private String topic;
 
-    @Override
-    public SubscribeMqInfo getSubscribeMqInfo() {
-        return new SubscribeMqInfo(mqAddress, topic, AutoOffsetReset.earliest);
-    }
+	@Override
+	public SubscribeMqInfo getSubscribeMqInfo() {
+		return new SubscribeMqInfo(mqAddress, topic, AutoOffsetReset.earliest);
+	}
 
-    @Override
-    public List<DeserializationReturn> deserialize(String className, byte[] bytes) {
-        List<DeserializationReturn> deserializationReturns = new ArrayList<>();
-        // 外部批量聚合根事件转换为多个聚合根的创建cmd
-        if (UpperAccountCreateEvent.class.getName().equals(className)) {
-            UpperAccountCreateEvent batchAccountCreateEvent = JsonUtils.decode(new String(bytes), className);
-            batchAccountCreateEvent.getAccounts().forEach(account -> {
-                Account.AccountCreateCmd accountCreateCmd = Account.AccountCreateCmd.newBuilder().setAccountCode(account).setBalanceAmt(batchAccountCreateEvent.getAmt()).build();
-                deserializationReturns.add(new DeserializationReturn(accountCreateCmd,  true));
-            });
-        }
-        log.info("deserialize return size: " + deserializationReturns.size());
-        return deserializationReturns;
-    }
+	@Override
+	public List<DeserializationReturn> deserialize(String className, byte[] bytes) {
+		List<DeserializationReturn> deserializationReturns = new ArrayList<>();
+		// 外部批量聚合根事件转换为多个聚合根的创建cmd
+		if (UpperAccountCreateEvent.class.getName().equals(className)) {
+			UpperAccountCreateEvent batchAccountCreateEvent = JsonUtils.decode(new String(bytes), className);
+			batchAccountCreateEvent.getAccounts().forEach(account -> {
+				Account.AccountCreateCmd accountCreateCmd = Account.AccountCreateCmd.newBuilder()
+						.setAccountCode(account).setBalanceAmt(batchAccountCreateEvent.getAmt()).build();
+				deserializationReturns.add(new DeserializationReturn(accountCreateCmd, true));
+			});
+		}
+		log.info("deserialize return size: " + deserializationReturns.size());
+		return deserializationReturns;
+	}
+
 }

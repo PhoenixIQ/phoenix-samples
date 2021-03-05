@@ -19,6 +19,8 @@ import java.io.Serializable;
 @EntityAggregateAnnotation(aggregateRootType = "inventory")
 public class InventoryAggregate implements Serializable {
 
+	private static final long serialVersionUID = 6261193431877070114L;
+
 	/** 商品ID **/
 	private String itemId;
 

@@ -16,8 +16,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class AccountAllocateOkEvent implements Serializable {
 
-    private String accountCode; // 划拨账户
+	private String accountCode; // 划拨账户
 
-    private double amt;        // 划拨金额
+	private double amt; // 划拨金额
 
 }
