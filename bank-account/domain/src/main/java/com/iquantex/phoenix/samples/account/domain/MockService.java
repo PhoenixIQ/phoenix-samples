@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class MockService {
 
-    public boolean isPass() {
-        return true;
-    }
+	public boolean isPass() {
+		return true;
+	}
+
 }

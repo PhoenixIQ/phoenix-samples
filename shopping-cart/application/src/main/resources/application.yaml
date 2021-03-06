@@ -33,6 +33,7 @@ quantex:
           - url: jdbc:h2:file:./data/test;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS PUBLIC
             username: sa
             password:
+      default-serializer: proto_stuff
     client:
       name: ${spring.application.name}-client
       mq:

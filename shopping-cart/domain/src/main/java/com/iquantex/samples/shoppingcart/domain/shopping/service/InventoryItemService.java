@@ -17,35 +17,35 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class InventoryItemService {
 
-    @Autowired
-    private PhoenixClient phoenixClient;
+	@Autowired
+	private PhoenixClient phoenixClient;
 
-    /**
-     * 判断商品库存是否充足
-     *
-     * @param qty
-     * @return
-     */
-    public boolean inventoryAdequacy(String itemId, int qty) {
-        return getInventoryItemBalanceQtyByItemId(itemId) - qty >= 0;
-    }
+	/**
+	 * 判断商品库存是否充足
+	 * @param qty
+	 * @return
+	 */
+	public boolean inventoryAdequacy(String itemId, int qty) {
+		return getInventoryItemBalanceQtyByItemId(itemId) - qty >= 0;
+	}
 
-    /**
-     * 获取商品库存
-     *
-     * @param itemId
-     * @return
-     */
-    private int getInventoryItemBalanceQtyByItemId(String itemId) {
-        Future<RpcResult> rsp = phoenixClient.send(InventoryItemQueryCmd.builder().itemId(itemId).build(), "shopping-cart", null);
-        try {
-            RpcResult rpcResult = rsp.get(10, TimeUnit.SECONDS);
-            InventoryItemQueryEvent inventoryItem = (InventoryItemQueryEvent) rpcResult.getData();
-            return inventoryItem.getBalanceQty();
-        } catch (Exception e) {
-            // TODO 暂定获取异常为库存为0, 如何支持聚合根降级?
-            return 0;
-        }
-    }
+	/**
+	 * 获取商品库存
+	 * @param itemId
+	 * @return
+	 */
+	private int getInventoryItemBalanceQtyByItemId(String itemId) {
+		Future<RpcResult> rsp = phoenixClient.send(InventoryItemQueryCmd.builder().itemId(itemId).build(),
+				"shopping-cart", null);
+		try {
+			RpcResult rpcResult = rsp.get(10, TimeUnit.SECONDS);
+			InventoryItemQueryEvent inventoryItem = (InventoryItemQueryEvent) rpcResult.getData();
+			return inventoryItem.getBalanceQty();
+		}
+		catch (Exception e) {
+			// TODO 暂定获取异常为库存为0, 如何支持聚合根降级?
+			return 0;
+		}
+	}
 
 }

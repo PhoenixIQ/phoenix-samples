@@ -20,28 +20,28 @@ import java.util.concurrent.TimeoutException;
 @RequestMapping("/hello")
 public class HelloController {
 
-    /**
-     * phoenix 客户端
-     */
-    @Autowired
-    private PhoenixClient client;
+	/**
+	 * phoenix 客户端
+	 */
+	@Autowired
+	private PhoenixClient client;
 
-    /**
-     * 处理 hello Http请求
-     *
-     * @return 指令返回结果
-     */
-    @PutMapping("/{helloId}")
-    public String allocate(@PathVariable String helloId) {
-        Hello.HelloCmd helloCmd = Hello.HelloCmd.newBuilder().setHelloId(helloId).build();
-        // 发送指令信息
-        Future<RpcResult> future = client.send(helloCmd, "helloworld", "");
-        try {
-            RpcResult result = future.get(10, TimeUnit.SECONDS);
-            return result.getMessage();
-        } catch (InterruptedException | ExecutionException | TimeoutException e) {
-            return "rpc error: " + e.getMessage();
-        }
-    }
+	/**
+	 * 处理 hello Http请求
+	 * @return 指令返回结果
+	 */
+	@PutMapping("/{helloId}")
+	public String allocate(@PathVariable String helloId) {
+		Hello.HelloCmd helloCmd = Hello.HelloCmd.newBuilder().setHelloId(helloId).build();
+		// 发送指令信息
+		Future<RpcResult> future = client.send(helloCmd, "helloworld", "");
+		try {
+			RpcResult result = future.get(10, TimeUnit.SECONDS);
+			return result.getMessage();
+		}
+		catch (InterruptedException | ExecutionException | TimeoutException e) {
+			return "rpc error: " + e.getMessage();
+		}
+	}
 
 }

@@ -15,14 +15,14 @@ import java.util.List;
 @NoArgsConstructor
 public class UpperAccountCreateEvent {
 
-    /**
-     * 账户集合
-     */
-    private List<String> accounts;
+	/**
+	 * 账户集合
+	 */
+	private List<String> accounts;
 
-    /**
-     * 初始化金额
-     */
-    private double       amt;
+	/**
+	 * 初始化金额
+	 */
+	private double amt;
 
 }

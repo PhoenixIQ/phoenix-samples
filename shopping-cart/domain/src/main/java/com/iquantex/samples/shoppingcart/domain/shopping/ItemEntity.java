@@ -15,6 +15,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class ItemEntity implements Serializable {
 
+	private static final long serialVersionUID = 2051938386628971038L;
+
 	/** 商品ID **/
 	private String itemId;
 

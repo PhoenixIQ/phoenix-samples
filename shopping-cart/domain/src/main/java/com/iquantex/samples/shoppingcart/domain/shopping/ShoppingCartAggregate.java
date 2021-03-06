@@ -24,6 +24,8 @@ import java.util.Map;
 @EntityAggregateAnnotation(aggregateRootType = "shoppingcart")
 public class ShoppingCartAggregate implements Serializable {
 
+	private static final long serialVersionUID = -3824795529916369738L;
+
 	/** 用户ID */
 	private String userId;
 

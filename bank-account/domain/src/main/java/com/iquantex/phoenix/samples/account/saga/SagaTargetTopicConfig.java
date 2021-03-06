@@ -10,15 +10,15 @@ import javax.annotation.PostConstruct;
 @Component
 public class SagaTargetTopicConfig {
 
-    public static volatile String ALLOCATE_CMD_TOPIC = "";
+	public static volatile String ALLOCATE_CMD_TOPIC = "";
 
-    @Value("${saga-allocate-cmd-topic}")
-    private String                allocateCmdTopic;
+	@Value("${saga-allocate-cmd-topic}")
+	private String allocateCmdTopic;
 
-    @PostConstruct
-    private void initConfig() {
-        ALLOCATE_CMD_TOPIC = allocateCmdTopic;
-        log.info("set allocateCmdTopic=<{}>", allocateCmdTopic);
-    }
+	@PostConstruct
+	private void initConfig() {
+		ALLOCATE_CMD_TOPIC = allocateCmdTopic;
+		log.info("set allocateCmdTopic=<{}>", allocateCmdTopic);
+	}
 
 }

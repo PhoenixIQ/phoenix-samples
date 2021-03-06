@@ -15,19 +15,19 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class AccountQueryEvent implements Serializable {
 
-    /** 账户代码 */
-    private String account;
+	/** 账户代码 */
+	private String account;
 
-    /** 账户余额 */
-    private double balanceAmt;
+	/** 账户余额 */
+	private double balanceAmt;
 
-    /** 成功转出次数 */
-    private int    successTransferOut;
+	/** 成功转出次数 */
+	private int successTransferOut;
 
-    /** 失败转出次数 */
-    private int    failTransferOut;
+	/** 失败转出次数 */
+	private int failTransferOut;
 
-    /** 成功转入次数 */
-    private int    successTransferIn;
+	/** 成功转入次数 */
+	private int successTransferIn;
 
 }

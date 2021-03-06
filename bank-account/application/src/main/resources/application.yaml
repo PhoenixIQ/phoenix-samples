@@ -86,6 +86,7 @@ quantex:
         initial-size: 0
         min-idle: 0
         max-active: 8
+      default-serializer: proto_stuff
     event-publish:
       event-task:
         enabled: true

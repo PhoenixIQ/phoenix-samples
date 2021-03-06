@@ -16,10 +16,10 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class AccountAllocateFailEvent implements Serializable {
 
-    private String accountCode; // 划拨账户
+	private String accountCode; // 划拨账户
 
-    private double amt;        // 划拨金额
+	private double amt; // 划拨金额
 
-    private String result;     // 失败原因
+	private String result; // 失败原因
 
 }
