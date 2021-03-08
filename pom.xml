@@ -29,6 +29,7 @@
     <modules>
         <module>bank-account</module>
         <module>hello-world</module>
+        <module>shopping</module>
         <module>shopping-cart</module>
     </modules>
 
