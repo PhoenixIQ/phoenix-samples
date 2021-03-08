@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.iquantex.samples</groupId>
+        <artifactId>phoenix-samples</artifactId>
+        <version>${revision}</version>
+        <relativePath>../</relativePath>
+    </parent>
+
+    <artifactId>shopping</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <!--sub modules-->
+            <dependency>
+                <groupId>com.iquantex.samples</groupId>
+                <artifactId>shopping.coreapi</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.iquantex.samples</groupId>
+                <artifactId>shopping.application</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.iquantex.samples</groupId>
+                <artifactId>shopping.domain</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <!--phoenix-->
+            <dependency>
+                <groupId>com.iquantex</groupId>
+                <artifactId>phoenix-server-starter</artifactId>
+                <version>${phoenix.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.iquantex</groupId>
+                <artifactId>phoenix-transaction</artifactId>
+                <version>${phoenix.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.iquantex</groupId>
+                <artifactId>phoenix-client-starter</artifactId>
+                <version>${phoenix.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.iquantex</groupId>
+                <artifactId>phoenix-eventstore-jdbc</artifactId>
+                <version>${phoenix.version}</version>
+            </dependency>
+
+            <!--tools-->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombook.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.protobuf</groupId>
+                <artifactId>protobuf-java</artifactId>
+                <version>${proto.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger2.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+
+    <build>
+        <plugins>
+            <!--编译插件-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+
+    </build>
+
+    <modules>
+        <module>application</module>
+        <module>coreapi</module>
+        <module>domain</module>
+    </modules>
+</project>
