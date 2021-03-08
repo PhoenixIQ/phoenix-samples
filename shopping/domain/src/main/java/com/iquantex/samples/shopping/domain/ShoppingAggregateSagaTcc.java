@@ -28,7 +28,7 @@ public class ShoppingAggregateSagaTcc implements Serializable {
 
     private static final long serialVersionUID = 7007603076743033374L;
     private BuyGoodsCmd request;
-    private String            remark           = "";
+    private String            remark           = "商品购买成功";
 
     @TransactionStart
     public TransactionReturn on(BuyGoodsCmd request) {

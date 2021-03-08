@@ -1,6 +1,7 @@
 package com.iquantex.samples.shopping.coreapi.account;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.io.Serializable;
@@ -8,6 +9,7 @@ import java.io.Serializable;
 /**
  * @author baozi
  */
+@Builder
 @AllArgsConstructor
 @Getter
 public class AccountQueryCmd implements Serializable {

@@ -1,10 +1,12 @@
 package com.iquantex.samples.shopping.coreapi.transaction;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.io.Serializable;
 
+@Builder
 @AllArgsConstructor
 @Getter
 public class BuyGoodsCmd implements Serializable {

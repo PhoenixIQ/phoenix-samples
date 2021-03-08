@@ -9,8 +9,6 @@ import com.iquantex.samples.shopping.coreapi.goods.GoodsCancelCmd;
 import com.iquantex.samples.shopping.coreapi.goods.GoodsCancelOkEvent;
 import com.iquantex.samples.shopping.coreapi.goods.GoodsConfirmCmd;
 import com.iquantex.samples.shopping.coreapi.goods.GoodsConfirmOkEvent;
-import com.iquantex.samples.shopping.coreapi.goods.GoodsCreateCmd;
-import com.iquantex.samples.shopping.coreapi.goods.GoodsCreateEvent;
 import com.iquantex.samples.shopping.coreapi.goods.GoodsQueryCmd;
 import com.iquantex.samples.shopping.coreapi.goods.GoodsQueryEvent;
 import com.iquantex.samples.shopping.coreapi.goods.GoodsSellCmd;
@@ -32,21 +30,18 @@ public class GoodsAggregate implements Serializable {
 
     private long              frozenQty;
 
+    /**
+     * 假定默认100个
+     */
+    public GoodsAggregate() {
+        this.qty = 100;
+        this.frozenQty = 0;
+    }
+
     @QueryHandler(aggregateRootId = "goodsCode")
     public ActReturn act(GoodsQueryCmd cmd) {
         return ActReturn.builder().retCode(RetCode.SUCCESS)
             .event(new GoodsQueryEvent(cmd.getGoodsCode(), qty, frozenQty)).build();
-    }
-
-    @CommandHandler(aggregateRootId = "goodsCode")
-    public ActReturn act(GoodsCreateCmd cmd) {
-        return ActReturn.builder().retCode(RetCode.SUCCESS)
-            .event(new GoodsCreateEvent(cmd.getQty(), cmd.getFrozenQty())).build();
-    }
-
-    public void on(GoodsCreateEvent event) {
-        this.frozenQty = event.getFrozenQty();
-        this.qty = event.getQty();
     }
 
     @CommandHandler(aggregateRootId = "goodsCode")

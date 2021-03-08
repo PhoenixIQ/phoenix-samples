@@ -153,3 +153,17 @@ public class ShoppingAggregateTcc implements Serializable {
 }
 ```
 
+
+
+## 快速启动
+1. 运行ShoppingApplication
+2. 调用接口购买商品
+```shell
+PUT http://127.0.0.1:8080/shopping/buy_goods/{accountCode}/{goodsCode}/{qty}/{price}
+```
+3. 查询账户和商品
+```shell
+GET http://127.0.0.1:8080/shopping/account/{accountCode}
+GET http://127.0.0.1:8080/shopping/goods/{goodsAccount}
+```
+

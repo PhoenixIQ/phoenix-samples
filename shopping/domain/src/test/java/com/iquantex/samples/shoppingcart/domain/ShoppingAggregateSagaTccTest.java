@@ -1,8 +1,6 @@
 package com.iquantex.samples.shoppingcart.domain;
 
 import com.iquantex.phoenix.transaction.test.AggregateFixture;
-import com.iquantex.samples.shopping.coreapi.account.AccountCreateCmd;
-import com.iquantex.samples.shopping.coreapi.goods.GoodsCreateCmd;
 import com.iquantex.samples.shopping.coreapi.transaction.BuyGoodsCmd;
 import com.iquantex.samples.shopping.domain.AccountAggregate;
 import com.iquantex.samples.shopping.domain.ShoppingAggregateSagaTcc;
@@ -18,10 +16,6 @@ public class ShoppingAggregateSagaTccTest {
 
     private AggregateFixture getFixture() {
         AggregateFixture fixture = new AggregateFixture(AccountAggregate.class.getPackage().getName());
-        AccountCreateCmd accountCreateCmd = new AccountCreateCmd("A1", 100, 0);
-        GoodsCreateCmd goodsCreateCmd = new GoodsCreateCmd("book", 10, 0);
-        fixture.when(accountCreateCmd).expectRetSuccessCode();
-        fixture.when(goodsCreateCmd).expectRetSuccessCode();
         return fixture;
     }
 

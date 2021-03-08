@@ -9,8 +9,6 @@ import com.iquantex.samples.shopping.coreapi.account.AccountCancelCmd;
 import com.iquantex.samples.shopping.coreapi.account.AccountCancelOkEvent;
 import com.iquantex.samples.shopping.coreapi.account.AccountConfirmCmd;
 import com.iquantex.samples.shopping.coreapi.account.AccountConfirmOkEvent;
-import com.iquantex.samples.shopping.coreapi.account.AccountCreateCmd;
-import com.iquantex.samples.shopping.coreapi.account.AccountCreateEvent;
 import com.iquantex.samples.shopping.coreapi.account.AccountPayCmd;
 import com.iquantex.samples.shopping.coreapi.account.AccountPayCompensateCmd;
 import com.iquantex.samples.shopping.coreapi.account.AccountPayCompensateOkEvent;
@@ -31,21 +29,19 @@ public class AccountAggregate implements Serializable {
     private double            amt;
     private double            frozenAmt;
 
+
+    /**
+     * 假定默认1W元
+     */
+    public AccountAggregate() {
+        this.amt = 10000;
+        this.frozenAmt = 0;
+    }
+
     @QueryHandler(aggregateRootId = "accountCode")
     public ActReturn act(AccountQueryCmd cmd) {
         return ActReturn.builder().retCode(RetCode.SUCCESS)
             .event(new AccountQueryEvent(cmd.getAccountCode(), amt, frozenAmt)).build();
-    }
-
-    @CommandHandler(aggregateRootId = "accountCode")
-    public ActReturn act(AccountCreateCmd cmd) {
-        return ActReturn.builder().retCode(RetCode.SUCCESS)
-            .event(new AccountCreateEvent(cmd.getAmt(), cmd.getFrozenAmt())).build();
-    }
-
-    public void on(AccountCreateEvent event) {
-        this.amt = event.getAmt();
-        this.frozenAmt = event.getFrozenAmt();
     }
 
     @CommandHandler(aggregateRootId = "accountCode")

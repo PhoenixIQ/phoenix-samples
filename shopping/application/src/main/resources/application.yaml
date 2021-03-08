@@ -1,7 +1,7 @@
 # app info config
 spring:
   application:
-    name: shopping-cart
+    name: shopping
 
 # web config
 server:
@@ -26,7 +26,7 @@ quantex:
       mq:
         type: kafka
         address: 127.0.0.1:9092
-        subscribe-topic: shopping-cart
+        subscribe-topic: shopping
       event-store:
         driver-class-name: org.h2.Driver
         data-sources:
