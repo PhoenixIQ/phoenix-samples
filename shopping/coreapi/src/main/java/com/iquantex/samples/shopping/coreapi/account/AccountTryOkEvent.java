@@ -11,8 +11,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class AccountTryOkEvent implements Serializable {
 
-    private String accountCode;
+	private String accountCode;
 
-    private double frozenAmt;
+	private double frozenAmt;
 
 }

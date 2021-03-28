@@ -11,13 +11,14 @@ import java.io.Serializable;
 @Getter
 public class BuyGoodsCmd implements Serializable {
 
-    private static final long serialVersionUID = -8667685124103764667L;
-    private String            accountCode;
+	private static final long serialVersionUID = -8667685124103764667L;
 
-    private String            goodsCode;
+	private String accountCode;
 
-    private long              qty;
+	private String goodsCode;
 
-    private double            price;
+	private long qty;
+
+	private double price;
 
 }

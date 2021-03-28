@@ -11,10 +11,10 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class AccountTryFailEvent implements Serializable {
 
-    private String accountCode;
+	private String accountCode;
 
-    private double frozenAmt;
+	private double frozenAmt;
 
-    private String remark;
+	private String remark;
 
 }

@@ -11,10 +11,10 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class GoodsTryFailEvent implements Serializable {
 
-    private String goodsCode;
+	private String goodsCode;
 
-    private long   frozenQty;
+	private long frozenQty;
 
-    private String remark;
+	private String remark;
 
 }

@@ -11,8 +11,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class GoodsCancelCmd implements Serializable {
 
-    private String goodsCode;
+	private String goodsCode;
 
-    private long   frozenQty;
+	private long frozenQty;
 
 }

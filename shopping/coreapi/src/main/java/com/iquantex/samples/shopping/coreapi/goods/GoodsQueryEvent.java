@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 /**
  * 商品查询事件
- * 
+ *
  * @author zhengjie.shen
  * @date 2020/3/23 10:33
  */
@@ -17,10 +17,10 @@ import java.io.Serializable;
 @Getter
 public class GoodsQueryEvent implements Serializable {
 
-    private String goodsCode;
+	private String goodsCode;
 
-    private long   qty;
+	private long qty;
 
-    private long   frozenQty;
+	private long frozenQty;
 
 }

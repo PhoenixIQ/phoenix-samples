@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 /**
  * 商品查询命令
- * 
+ *
  * @author zhengjie.shen
  * @date 2020/3/23 10:33
  */
@@ -17,5 +17,6 @@ import java.io.Serializable;
 @Getter
 public class GoodsQueryCmd implements Serializable {
 
-    private String goodsCode;
+	private String goodsCode;
+
 }

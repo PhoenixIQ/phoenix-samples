@@ -1,14 +1,15 @@
 package com.iquantex.samples.helloworld.domain.entity;
 
+import java.io.Serializable;
+
+import com.iquantex.phoenix.core.message.RetCode;
+import com.iquantex.phoenix.server.aggregate.ActReturn;
+import com.iquantex.phoenix.server.aggregate.CommandHandler;
+import com.iquantex.phoenix.server.aggregate.EntityAggregateAnnotation;
 import com.iquantex.samples.helloworld.coreapi.Hello;
-import com.iquantex.phoenix.server.aggregate.entity.CommandHandler;
-import com.iquantex.phoenix.server.aggregate.entity.EntityAggregateAnnotation;
-import com.iquantex.phoenix.server.aggregate.model.ActReturn;
-import com.iquantex.phoenix.server.aggregate.model.RetCode;
+
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-
-import java.io.Serializable;
 
 /**
  * hello 聚合根

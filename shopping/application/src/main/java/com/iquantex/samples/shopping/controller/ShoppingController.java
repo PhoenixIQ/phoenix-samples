@@ -21,7 +21,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-
 @Slf4j
 @RestController
 @RequestMapping("shopping")
@@ -34,8 +33,10 @@ public class ShoppingController {
 	}
 
 	@PutMapping("/buy_goods/{accountCode}/{goodsCode}/{qty}/{price}")
-	public String buyGoods(@PathVariable String accountCode, @PathVariable String goodsCode, @PathVariable int qty, @PathVariable double price) {
-		BuyGoodsCmd buyGoodsCmd = BuyGoodsCmd.builder().accountCode(accountCode).goodsCode(goodsCode).qty(qty).price(price).build();
+	public String buyGoods(@PathVariable String accountCode, @PathVariable String goodsCode, @PathVariable int qty,
+			@PathVariable double price) {
+		BuyGoodsCmd buyGoodsCmd = BuyGoodsCmd.builder().accountCode(accountCode).goodsCode(goodsCode).qty(qty)
+				.price(price).build();
 		Future<RpcResult> future = client.send(buyGoodsCmd, "shopping", UUID.randomUUID().toString());
 		try {
 			BuyGoodsEvent buyGoodsEvent = (BuyGoodsEvent) future.get(10, TimeUnit.SECONDS).getData();

@@ -11,8 +11,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class AccountPayCompensateFailEvent implements Serializable {
 
-    private String accountCode;
+	private String accountCode;
 
-    private double amt;
+	private double amt;
 
 }

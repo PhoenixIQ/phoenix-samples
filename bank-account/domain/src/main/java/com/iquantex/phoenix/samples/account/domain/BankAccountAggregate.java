@@ -1,24 +1,25 @@
 package com.iquantex.phoenix.samples.account.domain;
 
+import java.io.Serializable;
+import java.util.concurrent.TimeUnit;
+
 import com.google.common.util.concurrent.Uninterruptibles;
+import com.iquantex.phoenix.core.message.RetCode;
 import com.iquantex.phoenix.samples.account.api.command.AccountAllocateCmd;
 import com.iquantex.phoenix.samples.account.api.command.AccountQueryCmd;
 import com.iquantex.phoenix.samples.account.api.event.AccountAllocateFailEvent;
 import com.iquantex.phoenix.samples.account.api.event.AccountAllocateOkEvent;
 import com.iquantex.phoenix.samples.account.api.event.AccountQueryEvent;
 import com.iquantex.phoenix.samples.account.api.protobuf.Account;
-import com.iquantex.phoenix.server.aggregate.entity.CommandHandler;
-import com.iquantex.phoenix.server.aggregate.entity.EntityAggregateAnnotation;
-import com.iquantex.phoenix.server.aggregate.entity.QueryHandler;
-import com.iquantex.phoenix.server.aggregate.model.ActReturn;
-import com.iquantex.phoenix.server.aggregate.model.RetCode;
+import com.iquantex.phoenix.server.aggregate.ActReturn;
+import com.iquantex.phoenix.server.aggregate.CommandHandler;
+import com.iquantex.phoenix.server.aggregate.EntityAggregateAnnotation;
+import com.iquantex.phoenix.server.aggregate.QueryHandler;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.io.Serializable;
-import java.util.concurrent.TimeUnit;
 
 /**
  * * Created by lan on 2019/10/10
