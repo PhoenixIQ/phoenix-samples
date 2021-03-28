@@ -11,8 +11,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class GoodsSellCompensateOkEvent implements Serializable {
 
-    private String goodsCode;
+	private String goodsCode;
 
-    private long   qty;
+	private long qty;
 
 }

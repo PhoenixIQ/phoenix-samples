@@ -1,15 +1,20 @@
 package com.iquantex.samples.shoppingcart.domain.inventory;
 
-import com.iquantex.phoenix.server.aggregate.entity.CommandHandler;
-import com.iquantex.phoenix.server.aggregate.entity.EntityAggregateAnnotation;
-import com.iquantex.phoenix.server.aggregate.entity.QueryHandler;
-import com.iquantex.phoenix.server.aggregate.model.ActReturn;
-import com.iquantex.phoenix.server.aggregate.model.RetCode;
-import com.iquantex.samples.shoppingcart.coreapi.inventory.*;
+import java.io.Serializable;
+
+import com.iquantex.phoenix.core.message.RetCode;
+import com.iquantex.phoenix.server.aggregate.ActReturn;
+import com.iquantex.phoenix.server.aggregate.CommandHandler;
+import com.iquantex.phoenix.server.aggregate.EntityAggregateAnnotation;
+import com.iquantex.phoenix.server.aggregate.QueryHandler;
+import com.iquantex.samples.shoppingcart.coreapi.inventory.InventoryAllocateCmd;
+import com.iquantex.samples.shoppingcart.coreapi.inventory.InventoryAllocateFailEvent;
+import com.iquantex.samples.shoppingcart.coreapi.inventory.InventoryAllocateOkEvent;
+import com.iquantex.samples.shoppingcart.coreapi.inventory.InventoryItemQueryCmd;
+import com.iquantex.samples.shoppingcart.coreapi.inventory.InventoryItemQueryEvent;
+
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-
-import java.io.Serializable;
 
 /**
  * @author baozi

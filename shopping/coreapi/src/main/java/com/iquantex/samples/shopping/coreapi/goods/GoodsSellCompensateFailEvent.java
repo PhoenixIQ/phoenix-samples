@@ -11,8 +11,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class GoodsSellCompensateFailEvent implements Serializable {
 
-    private String goodsCode;
+	private String goodsCode;
 
-    private long   qty;
+	private long qty;
 
 }

@@ -1,16 +1,17 @@
 package com.iquantex.phoenix.samples.account;
 
+import java.util.List;
+
+import com.iquantex.phoenix.core.message.Message;
+import com.iquantex.phoenix.core.message.MessageFactory;
+import com.iquantex.phoenix.core.message.RetCode;
 import com.iquantex.phoenix.samples.account.api.command.AccountAllocateCmd;
+import com.iquantex.phoenix.samples.account.api.command.AccountTransferCmd;
 import com.iquantex.phoenix.samples.account.api.event.AccountAllocateFailEvent;
 import com.iquantex.phoenix.samples.account.api.event.AccountAllocateOkEvent;
-import com.iquantex.phoenix.samples.account.api.command.AccountTransferCmd;
-import com.iquantex.phoenix.server.aggregate.model.RetCode;
-import com.iquantex.phoenix.server.message.Message;
-import com.iquantex.phoenix.server.message.MessageFactory;
 import com.iquantex.phoenix.transaction.test.TransactionAggregateFixture;
-import org.junit.Test;
 
-import java.util.List;
+import org.junit.Test;
 
 /**
  * Created by Sun on 2020/2/14.
@@ -33,7 +34,7 @@ public class BankTransferSagaTest {
 	public void trans_start_transaction() {
 		int tranAmt = 100;
 		AccountTransferCmd req = new AccountTransferCmd(inAccountCode, outAccountCode, tranAmt);
-		reqMsg = MessageFactory.getRequestMsg("local", "client", req);
+		reqMsg = MessageFactory.getCmdMsg("local", "client", req);
 		testFixture.when(reqMsg).expectMessageSize(1);
 	}
 
@@ -44,7 +45,7 @@ public class BankTransferSagaTest {
 	public void trans_out_ok() {
 		int tranAmt = 100;
 		AccountTransferCmd req = new AccountTransferCmd(inAccountCode, outAccountCode, tranAmt);
-		reqMsg = MessageFactory.getRequestMsg("local", "client", req);
+		reqMsg = MessageFactory.getCmdMsg("local", "client", req);
 
 		// 待发出去给c端的转账cmd
 		Message transOutCmdMsg = null;
@@ -70,11 +71,10 @@ public class BankTransferSagaTest {
 	public void trans_in_ok() {
 		int tranAmt = 100;
 		AccountTransferCmd req = new AccountTransferCmd(inAccountCode, outAccountCode, tranAmt);
-		reqMsg = MessageFactory.getRequestMsg("local", "client", req);
+		reqMsg = MessageFactory.getCmdMsg("local", "client", req);
 
-		testFixture.when(reqMsg).expectMessageSize(1);
 		Message transInCmdMsg = null;
-		List<Message> outMsgList = testFixture.when(reqMsg).getOutMsgList();
+		List<Message> outMsgList = testFixture.when(reqMsg).expectMessageSize(1).getOutMsgList();
 		for (Message message : outMsgList) {
 			if (message.getPayloadClassName().equals(AccountAllocateCmd.class.getName())) {
 				transInCmdMsg = message;
@@ -96,10 +96,9 @@ public class BankTransferSagaTest {
 	public void trans_out_fail() {
 		int tranAmt = 1100;
 		AccountTransferCmd req = new AccountTransferCmd(inAccountCode, outAccountCode, tranAmt);
-		reqMsg = MessageFactory.getRequestMsg("local", "client", req);
+		reqMsg = MessageFactory.getCmdMsg("local", "client", req);
 
 		// 待发出去给c端的转账cmd
-		testFixture.when(reqMsg);
 		Message transOutCmdMsg = null;
 		List<Message> outMsgList = testFixture.when(reqMsg).getOutMsgList();
 		for (Message message : outMsgList) {

@@ -14,8 +14,9 @@ import java.io.Serializable;
 @Getter
 public class AccountQueryCmd implements Serializable {
 
-    private static final long serialVersionUID = -4177381326154554282L;
-    /** 转入账户 */
-    private String            accountCode;
+	private static final long serialVersionUID = -4177381326154554282L;
+
+	/** 转入账户 */
+	private String accountCode;
 
 }

@@ -2,13 +2,7 @@ package com.iquantex.phoenix.samples.account.listener;
 
 import java.util.List;
 
-import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.listener.BatchAcknowledgingMessageListener;
-import org.springframework.kafka.support.Acknowledgment;
-
+import com.iquantex.phoenix.core.message.Message;
 import com.iquantex.phoenix.eventpublish.core.EventDeserializer;
 import com.iquantex.phoenix.eventpublish.deserializer.DefaultMessageDeserializer;
 import com.iquantex.phoenix.samples.account.api.event.AccountAllocateFailEvent;
@@ -16,9 +10,13 @@ import com.iquantex.phoenix.samples.account.api.event.AccountAllocateOkEvent;
 import com.iquantex.phoenix.samples.account.api.protobuf.Account;
 import com.iquantex.phoenix.samples.account.model.AccountStore;
 import com.iquantex.phoenix.samples.account.repository.AccountStoreRepository;
-import com.iquantex.phoenix.server.message.Message;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.listener.BatchAcknowledgingMessageListener;
+import org.springframework.kafka.support.Acknowledgment;
 
 @Slf4j
 public class BankAccountEventListener implements BatchAcknowledgingMessageListener<String, byte[]> {

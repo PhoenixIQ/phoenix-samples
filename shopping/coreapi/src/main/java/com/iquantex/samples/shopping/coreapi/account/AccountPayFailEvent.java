@@ -11,10 +11,10 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class AccountPayFailEvent implements Serializable {
 
-    private String accountCode;
+	private String accountCode;
 
-    private double amt;
+	private double amt;
 
-    private String remark;
+	private String remark;
 
 }

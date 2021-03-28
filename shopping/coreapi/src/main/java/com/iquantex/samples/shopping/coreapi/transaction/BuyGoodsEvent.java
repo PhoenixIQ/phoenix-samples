@@ -9,6 +9,6 @@ import java.io.Serializable;
 @Getter
 public class BuyGoodsEvent implements Serializable {
 
-    private String remark;
+	private String remark;
 
 }

@@ -11,8 +11,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class AccountPayCompensateCmd implements Serializable {
 
-    private String accountCode;
+	private String accountCode;
 
-    private double amt;
+	private double amt;
 
 }
