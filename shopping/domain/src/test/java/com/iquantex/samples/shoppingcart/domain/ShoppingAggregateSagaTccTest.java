@@ -24,7 +24,7 @@ public class ShoppingAggregateSagaTccTest {
 	@Test
 	public void expectRetSuccessCode() {
 		AggregateFixture fixture = getFixture();
-		BuyGoodsCmd buyGoodsCmd = new BuyGoodsCmd("A1", "book", 1, 10.0);
+		BuyGoodsCmd buyGoodsCmd = new BuyGoodsCmd("A1", "book", 10, 10.0);
 		fixture.when(buyGoodsCmd).printIdentify().expectRetSuccessCode();
 	}
 
@@ -34,7 +34,7 @@ public class ShoppingAggregateSagaTccTest {
 	@Test
 	public void expectRetFailCode_account() {
 		AggregateFixture fixture = getFixture();
-		BuyGoodsCmd buyGoodsCmd = new BuyGoodsCmd("A1", "book", 1, 101.0);
+		BuyGoodsCmd buyGoodsCmd = new BuyGoodsCmd("A1", "book", 100, 101.0);
 		fixture.when(buyGoodsCmd).printIdentify().expectRetFailCode();
 	}
 
@@ -44,7 +44,7 @@ public class ShoppingAggregateSagaTccTest {
 	@Test
 	public void expectRetFailCode_goods() {
 		AggregateFixture fixture = getFixture();
-		BuyGoodsCmd buyGoodsCmd = new BuyGoodsCmd("A1", "book", 11, 1.0);
+		BuyGoodsCmd buyGoodsCmd = new BuyGoodsCmd("A1", "book", 110, 1.0);
 		fixture.when(buyGoodsCmd).printIdentify().expectRetFailCode();
 	}
 
@@ -54,7 +54,7 @@ public class ShoppingAggregateSagaTccTest {
 	@Test
 	public void expectRetFailCode_account_goods() {
 		AggregateFixture fixture = getFixture();
-		BuyGoodsCmd buyGoodsCmd = new BuyGoodsCmd("A1", "book", 11, 10.0);
+		BuyGoodsCmd buyGoodsCmd = new BuyGoodsCmd("A1", "book", 110, 10.0);
 		fixture.when(buyGoodsCmd).printIdentify().expectRetFailCode();
 	}
 
