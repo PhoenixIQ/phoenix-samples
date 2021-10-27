@@ -1,5 +1,18 @@
 package com.iquantex.phoenix.samples.account.service;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.iquantex.phoenix.client.PhoenixClient;
+import com.iquantex.phoenix.client.RpcResult;
+import com.iquantex.phoenix.client.utils.RateLimiter;
+import com.iquantex.phoenix.samples.account.api.command.AccountAllocateCmd;
+import com.iquantex.phoenix.samples.account.api.command.AccountQueryCmd;
+import com.iquantex.phoenix.samples.account.api.command.AccountTransferCmd;
+import com.iquantex.phoenix.samples.account.api.event.AccountQueryEvent;
+import com.iquantex.phoenix.samples.account.api.other.UpperAccountCreateEvent;
+import com.iquantex.phoenix.samples.account.api.protobuf.Account;
+import com.iquantex.phoenix.samples.account.model.AccountStore;
+import com.iquantex.phoenix.samples.account.repository.AccountStoreRepository;
+import com.iquantex.phoenix.samples.account.utils.JsonUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -7,27 +20,10 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-
-import com.iquantex.phoenix.samples.account.api.command.AccountAllocateCmd;
-import com.iquantex.phoenix.samples.account.api.command.AccountQueryCmd;
-import com.iquantex.phoenix.samples.account.api.event.AccountQueryEvent;
-import com.iquantex.phoenix.samples.account.api.command.AccountTransferCmd;
-import com.iquantex.phoenix.samples.account.utils.JsonUtils;
-import com.iquantex.phoenix.samples.account.api.other.UpperAccountCreateEvent;
-import com.iquantex.phoenix.samples.account.api.protobuf.Account;
-import com.iquantex.phoenix.samples.account.model.AccountStore;
-import com.iquantex.phoenix.samples.account.repository.AccountStoreRepository;
-import org.springframework.beans.factory.annotation.Qualifier;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
-
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.iquantex.phoenix.client.PhoenixClient;
-import com.iquantex.phoenix.client.RpcResult;
-import com.iquantex.phoenix.client.utils.RateLimiter;
-
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author baozi
@@ -44,8 +40,9 @@ public class BankAccountServiceImpl implements BankAccountService {
 	@Value("${phoenix.server.topic.account-tn}")
 	private String accountTnTopic;
 
-	@Value("${phoenix.server.topic.create-account-event}")
+	@Value("${create-account-event.subscribe.topic}")
 	private String createAccountEventTopic;
+
 
 	// kafka发送端
 	private final KafkaTemplate<String, String> kafkaTemplate;

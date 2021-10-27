@@ -1,49 +1,72 @@
 package com.iquantex.phoenix.samples.account.domain;
 
+import com.iquantex.phoenix.core.connect.api.CollectMetaData;
+import com.iquantex.phoenix.core.connect.api.CollectResult;
+import com.iquantex.phoenix.core.connect.api.Records;
+import com.iquantex.phoenix.core.connect.api.SourceCollect;
+import com.iquantex.phoenix.core.connect.api.Subscribe;
+import com.iquantex.phoenix.core.connect.kafka.KafkaSubscribe;
+import com.iquantex.phoenix.samples.account.api.other.UpperAccountCreateEvent;
+import com.iquantex.phoenix.samples.account.api.protobuf.Account.AccountCreateCmd;
+import com.iquantex.phoenix.samples.account.utils.JsonUtils;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.iquantex.phoenix.samples.account.api.other.UpperAccountCreateEvent;
-import com.iquantex.phoenix.samples.account.api.protobuf.Account;
-import com.iquantex.phoenix.samples.account.utils.JsonUtils;
-import com.iquantex.phoenix.server.mq.kafka.AutoOffsetReset;
-import com.iquantex.phoenix.server.mq.subscribe.DeserializationReturn;
-import com.iquantex.phoenix.server.mq.subscribe.Subscribe;
-import com.iquantex.phoenix.server.mq.subscribe.SubscribeMqInfo;
-
+import java.util.Properties;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+/**
+ * 订阅创建账户的事件，将这类mq消息序列化成事件
+ *
+ * @author AndyChen
+ */
 @Slf4j
-@Component("WebEventTopicSubscribe")
-public class CreateAccountEventSubscribe implements Subscribe {
+@Configuration
+@ConditionalOnProperty(value = "create-account-event.subscribe.enabled", havingValue = "true")
+public class CreateAccountEventSubscribe {
 
-	@Value("${create-account-event.mqAddress}")
-	private String mqAddress;
+    @Value("${spring.application.name}")
+    private String appName;
 
-	@Value("${create-account-event.topic}")
-	private String topic;
+    @Value("${create-account-event.subscribe.address}")
+    private String mqAddress;
 
-	@Override
-	public SubscribeMqInfo getSubscribeMqInfo() {
-		return new SubscribeMqInfo(mqAddress, topic, AutoOffsetReset.earliest);
-	}
+    @Value("${create-account-event.subscribe.topic}")
+    private String subscribeTopic;
 
-	@Override
-	public List<DeserializationReturn> deserialize(String className, byte[] bytes) {
-		List<DeserializationReturn> deserializationReturns = new ArrayList<>();
-		// 外部批量聚合根事件转换为多个聚合根的创建cmd
-		if (UpperAccountCreateEvent.class.getName().equals(className)) {
-			UpperAccountCreateEvent batchAccountCreateEvent = JsonUtils.decode(new String(bytes), className);
-			batchAccountCreateEvent.getAccounts().forEach(account -> {
-				Account.AccountCreateCmd accountCreateCmd = Account.AccountCreateCmd.newBuilder()
-						.setAccountCode(account).setBalanceAmt(batchAccountCreateEvent.getAmt()).build();
-				deserializationReturns.add(new DeserializationReturn(accountCreateCmd, true));
-			});
-		}
-		log.info("deserialize return size: " + deserializationReturns.size());
-		return deserializationReturns;
-	}
+    @Bean
+    public Subscribe customSubscribe() {
+        Properties properties = new Properties();
+        properties.putIfAbsent(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
+        return new KafkaSubscribe(mqAddress, subscribeTopic, appName, properties,
+            new SelfSerializeSchema());
+    }
+
+    class SelfSerializeSchema implements SourceCollect {
+
+        @Override
+        public List<CollectResult> collect(Records records, CollectMetaData collectMetaData) {
+            List<CollectResult> collectResults = new ArrayList<>();
+            if (UpperAccountCreateEvent.class.getName().equals(records.getKey())) {
+                UpperAccountCreateEvent event = JsonUtils.decode(new String(records.getValue()),
+                    records.getKey());
+                List<CollectResult> resultList = event.getAccounts().stream()
+                    .map(account -> AccountCreateCmd.newBuilder()
+                        .setAccountCode(account)
+                        .setBalanceAmt(event.getAmt())
+                        .build()
+                    ).map(accountCreateCmd -> new CollectResult(accountCreateCmd, true))
+                    .collect(Collectors.toList());
+                collectResults.addAll(resultList);
+            }
+            log.info("deserialize return size: " + collectResults.size());
+            return collectResults;
+        }
+    }
 
 }
