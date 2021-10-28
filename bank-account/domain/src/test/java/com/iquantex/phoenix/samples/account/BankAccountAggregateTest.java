@@ -30,7 +30,7 @@ public class BankAccountAggregateTest {
 		// mock 聚合根类中注入的Spring service，返回值先给定 true，以进行正常的业务单元测试
 		mockService = Mockito.mock(MockService.class);
 		Mockito.when(mockService.isPass()).thenReturn(true);
-		testFixture.mockBean("mockService",mockService);
+		testFixture.mockBean("mockService", mockService);
 		testFixture.when(createCmd).expectRetSuccessCode();
 	}
 

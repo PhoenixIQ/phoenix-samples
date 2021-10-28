@@ -30,43 +30,40 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnProperty(value = "create-account-event.subscribe.enabled", havingValue = "true")
 public class CreateAccountEventSubscribe {
 
-    @Value("${spring.application.name}")
-    private String appName;
+	@Value("${spring.application.name}")
+	private String appName;
 
-    @Value("${create-account-event.subscribe.address}")
-    private String mqAddress;
+	@Value("${create-account-event.subscribe.address}")
+	private String mqAddress;
 
-    @Value("${create-account-event.subscribe.topic}")
-    private String subscribeTopic;
+	@Value("${create-account-event.subscribe.topic}")
+	private String subscribeTopic;
 
-    @Bean
-    public Subscribe customSubscribe() {
-        Properties properties = new Properties();
-        properties.putIfAbsent(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
-        return new KafkaSubscribe(mqAddress, subscribeTopic, appName, properties,
-            new SelfSerializeSchema());
-    }
+	@Bean
+	public Subscribe customSubscribe() {
+		Properties properties = new Properties();
+		properties.putIfAbsent(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
+		return new KafkaSubscribe(mqAddress, subscribeTopic, appName, properties, new SelfSerializeSchema());
+	}
 
-    class SelfSerializeSchema implements SourceCollect {
+	class SelfSerializeSchema implements SourceCollect {
 
-        @Override
-        public List<CollectResult> collect(Records records, CollectMetaData collectMetaData) {
-            List<CollectResult> collectResults = new ArrayList<>();
-            if (UpperAccountCreateEvent.class.getName().equals(records.getKey())) {
-                UpperAccountCreateEvent event = JsonUtils.decode(new String(records.getValue()),
-                    records.getKey());
-                List<CollectResult> resultList = event.getAccounts().stream()
-                    .map(account -> AccountCreateCmd.newBuilder()
-                        .setAccountCode(account)
-                        .setBalanceAmt(event.getAmt())
-                        .build()
-                    ).map(accountCreateCmd -> new CollectResult(accountCreateCmd, true))
-                    .collect(Collectors.toList());
-                collectResults.addAll(resultList);
-            }
-            log.info("deserialize return size: " + collectResults.size());
-            return collectResults;
-        }
-    }
+		@Override
+		public List<CollectResult> collect(Records records, CollectMetaData collectMetaData) {
+			List<CollectResult> collectResults = new ArrayList<>();
+			if (UpperAccountCreateEvent.class.getName().equals(records.getKey())) {
+				UpperAccountCreateEvent event = JsonUtils.decode(new String(records.getValue()), records.getKey());
+				List<CollectResult> resultList = event.getAccounts().stream()
+						.map(account -> AccountCreateCmd.newBuilder().setAccountCode(account)
+								.setBalanceAmt(event.getAmt()).build())
+						.map(accountCreateCmd -> new CollectResult(accountCreateCmd, true))
+						.collect(Collectors.toList());
+				collectResults.addAll(resultList);
+			}
+			log.info("deserialize return size: " + collectResults.size());
+			return collectResults;
+		}
+
+	}
 
 }
