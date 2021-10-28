@@ -43,7 +43,6 @@ public class BankAccountServiceImpl implements BankAccountService {
 	@Value("${create-account-event.subscribe.topic}")
 	private String createAccountEventTopic;
 
-
 	// kafka发送端
 	private final KafkaTemplate<String, String> kafkaTemplate;
 
