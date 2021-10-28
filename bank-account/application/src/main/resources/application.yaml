@@ -85,7 +85,7 @@ quantex:
             username: sa
             password:
       default-serializer: proto_stuff
-      package-name: com.iquantex.phoenix.samples.account.domain
+      package-name: com.iquantex.phoenix.samples.account
     event-publish:
       event-task:
         enabled: true
