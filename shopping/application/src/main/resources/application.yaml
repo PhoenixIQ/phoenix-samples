@@ -26,7 +26,8 @@ quantex:
       mq:
         type: kafka
         address: 127.0.0.1:9092
-        subscribe-topic: shopping
+        subscribe:
+          - topic: shopping
       event-store:
         driver-class-name: org.h2.Driver
         data-sources:
@@ -34,6 +35,7 @@ quantex:
             username: sa
             password:
       default-serializer: proto_stuff
+      package-name: com.iquantex.samples.shopping.domain
     client:
       name: ${spring.application.name}-client
       mq:

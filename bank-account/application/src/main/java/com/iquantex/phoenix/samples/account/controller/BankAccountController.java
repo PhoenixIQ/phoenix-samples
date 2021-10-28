@@ -1,11 +1,12 @@
 package com.iquantex.phoenix.samples.account.controller;
 
-import org.springframework.web.bind.annotation.*;
-
 import com.iquantex.phoenix.samples.account.service.BankAccountService;
-import com.iquantex.phoenix.starter.autoconfigrue.controller.BaseController;
-
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 银行转账controller类
@@ -16,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @RequestMapping("/accounts")
-public class BankAccountController extends BaseController {
+public class BankAccountController {
 
 	private final BankAccountService bankAccountService;
 
