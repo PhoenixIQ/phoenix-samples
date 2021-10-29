@@ -163,13 +163,20 @@
         </dependency>
     </dependencies>
 
-    <distributionManagement>
+    <repositories>
         <repository>
-            <id>releases</id>
-            <name>releases</name>
+            <id>quantex</id>
+            <name>Quantex Maven Repository</name>
             <url>https://artifact.iquantex.com/repository/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <layout>default</layout>
         </repository>
-    </distributionManagement>
+    </repositories>
 
     <build>
         <defaultGoal>compile</defaultGoal>
