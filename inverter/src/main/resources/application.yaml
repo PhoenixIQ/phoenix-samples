@@ -1,0 +1,75 @@
+# web config
+server:
+  port: 8085
+  servlet:
+    context-path: /
+
+spring:
+  profiles:
+    active: h2
+  main:
+    allow-bean-definition-overriding: true
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      max-poll-records: 100
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+    listener:
+      type: batch
+      ack-mode: batch
+      concurrency: 4
+      poll-timeout: 3000
+
+  application:
+    name: inverter
+  flyway:
+    enabled: true
+  jackson:
+    time-zone: GMT+8
+
+quantex:
+  phoenix:
+    client:
+      name: ${spring.application.name}-client
+      mq:
+        type: kafka
+        address: ${spring.kafka.bootstrap-servers}
+    server:
+      name: ${spring.application.name}
+      performance:
+        batch-process: 250
+      mq:
+        type: kafka
+        address: ${spring.kafka.bootstrap-servers}
+        subscribe:
+          - topic: invert-topic
+      event-store:
+        initialSize: 2
+        minIdle: 2
+        maxActive: 8
+      package-name: "com.iquantex.samples.inverter"
+      license: WPA2pHtCeLplZP0AWIYD6TrZruHRSMLC2xt7NMhxDT+cv9nW14zVnhDpmkG0pVamKWSWVdEWINFfoSnZfyaPooZ38TE/R8qdi+fJI83FzTAMUtfOS8NR71vq+1s+KujJJrQpZQxgGZfylvvHhyMuqWbwJWZ3Nwsd/rZv2HuNHTBDJUWecshxTm8etJI0L/D4q+QREzsa54MB6uvC51D3jiDoBg4N1tKIFjJwsD6ugzsSpVlM9lGU5G43pXpJOSt2RT1e2bETRfteaQWKwEz19iyukG2gXIraR9JJt0TTDvnBVCplm+blHqXIB2VCCR3J7LMzNKhEfOrErFWzU/NjEgBy92kzNP215zSFyG8w5NkfxM5n+zsSEYiXnqqjyOFJBZ+FmNoHMMY7fN01dI7Tx5GWBYaceYJdGc9DoYRpkI+ifg6Xp0yZkDHJiJv1C5oQ0p0S1LxGwlpNWMvl1ElGuPtEvJQbldQQSQMtOX3JWaf/fbzKvFcoA9xB11QYzsLE0KyAaUlZYPYFK/VYxoZSUoFo18F7upWhYbvSN2KNTuFI04lfw4z6rktwO3SDQAdF7AxueQPP4h/iwKhgldO4p4rL5xCWpaNX8x1Ub/y1RETK6hkfE7+YO3nAkmnFTP2JMB6aTmzw14jWCsu3ILt30HPma4S14lNNvTfpnfaUoVsTa0SN0KKIF6ToB960rwhN+P5PEWTZA92EX5CGNCVSoKtcNCQXwDHy685aaIcynq+Ioxdlp7hMjTLSn4uc1RANK7RcsuH6Y1Sla5CPctDXX6Nyw1uE1NEGwBzo8PTmT6c3YB1lOGfOJq8s4uPnxuSsmCoOUvbyIh3YKybQf6dRzQ==
+      default-serializer: proto_stuff
+      console:
+        enabled: true
+    event-publish:
+      enabled: true
+      batch-size: 100
+      buffer-queue-size: 32
+      from-begin: true
+      event-task:
+        enabled: true
+        topic: invert-event
+      monitor-task:
+        enabled: false
+        es-server: localhost:9200
+embedded-kafka: true
+
+# log config
+logging:
+  level:
+    root: info
+  file: log/${spring.application.name}.log
