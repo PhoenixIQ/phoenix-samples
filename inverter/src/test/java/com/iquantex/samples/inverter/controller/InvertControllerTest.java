@@ -1,9 +1,16 @@
 package com.iquantex.samples.inverter.controller;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import com.alibaba.fastjson.JSON;
 import com.iquantex.samples.inverter.domain.entity.Inverter;
 import com.iquantex.samples.inverter.dto.InverterDTO;
 import com.iquantex.samples.inverter.service.InvertService;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import lombok.SneakyThrows;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -19,25 +26,15 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = InvertController.class)
 @EnableWebMvc
 @AutoConfigureMockMvc
 public class InvertControllerTest {
 
-  @MockBean
-  private InvertService invertService;
+  @MockBean private InvertService invertService;
 
-  @Autowired
-  private MockMvc mockMvc;
+  @Autowired private MockMvc mockMvc;
 
   private static final String DEVICE_CODE = "001";
   private static final String KEY = "shenzhen";

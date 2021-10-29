@@ -6,12 +6,11 @@ import com.iquantex.phoenix.dgc.annotation.Model;
 import com.iquantex.phoenix.dgc.annotation.Observable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-
-import java.io.Serializable;
-import java.util.Date;
 
 /** @author 86187 */
 @Getter
@@ -22,7 +21,6 @@ import java.util.Date;
 public class Inverter implements Serializable {
 
   private static final long serialVersionUID = 42L;
-
 
   @Observable
   @ApiModelProperty("设备名称")

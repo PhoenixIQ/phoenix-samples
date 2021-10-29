@@ -13,13 +13,12 @@ import com.iquantex.samples.inverter.domain.transformer.InverterTransformer;
 import com.iquantex.samples.inverter.domain.utils.ReportDistributedDataHelper;
 import com.iquantex.samples.inverter.dto.InverterDTO;
 import com.iquantex.samples.inverter.dto.PhotovoltaicDTO;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Random;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 /** @author 86187 */
 @EntityAggregateAnnotation(aggregateRootType = "invert", snapshotInterval = 2)

@@ -1,12 +1,11 @@
 package com.iquantex.samples.inverter.config;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.test.rule.KafkaEmbedded;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Configuration
 @ConditionalOnProperty(value = "embedded-kafka", havingValue = "true", matchIfMissing = true)

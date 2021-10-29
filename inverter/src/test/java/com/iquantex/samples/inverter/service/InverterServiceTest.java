@@ -1,11 +1,21 @@
 package com.iquantex.samples.inverter.service;
 
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
+
 import com.iquantex.phoenix.client.PhoenixClient;
 import com.iquantex.phoenix.client.RpcResult;
 import com.iquantex.phoenix.client.RpcResultCode;
 import com.iquantex.samples.inverter.constant.InverterConst;
 import com.iquantex.samples.inverter.domain.api.msg.InverterData;
 import com.iquantex.samples.inverter.dto.InverterDTO;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,25 +24,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.*;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = InvertService.class)
 public class InverterServiceTest {
-  @Autowired
-  private InvertService invertService;
+  @Autowired private InvertService invertService;
 
-  @MockBean
-  private PhoenixClient phoenixClient;
+  @MockBean private PhoenixClient phoenixClient;
 
   private static final String DEVICE_CODE = "001";
   private static final String KEY = "shenzhen";

@@ -10,10 +10,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class PhotovolaicService {
 
-  @Autowired
-  private DistributeDataManager distributeDataManager;
-  @Autowired
-  private PhoenixClient phoenixClient;
+  @Autowired private DistributeDataManager distributeDataManager;
+  @Autowired private PhoenixClient phoenixClient;
 
   public String addPhotovolaic(PhotovoltaicDTO photovoltaicDTO) {
     // 光伏因素影响逆变器离散率

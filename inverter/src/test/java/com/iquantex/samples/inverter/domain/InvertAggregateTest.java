@@ -5,11 +5,10 @@ import com.iquantex.phoenix.server.aggregate.inner.cmd.DdataChangeCmd;
 import com.iquantex.phoenix.server.test.EntityAggregateFixture;
 import com.iquantex.samples.inverter.domain.api.msg.InverterData;
 import com.iquantex.samples.inverter.dto.InverterDTO;
+import java.util.Date;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.Date;
 
 public class InvertAggregateTest {
 

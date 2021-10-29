@@ -64,11 +64,6 @@
             <artifactId>phoenix-dgc</artifactId>
             <version>${phoenix.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.iquantex.portal</groupId>
-            <artifactId>web-api</artifactId>
-            <version>1.0.0</version>
-        </dependency>
 
         <!--H2数据库-->
         <dependency>

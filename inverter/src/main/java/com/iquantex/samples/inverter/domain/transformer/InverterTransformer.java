@@ -1,11 +1,9 @@
 package com.iquantex.samples.inverter.domain.transformer;
 
-
 import com.iquantex.samples.inverter.constant.InverterConst;
 import com.iquantex.samples.inverter.domain.api.msg.InverterData;
 import com.iquantex.samples.inverter.domain.entity.Inverter;
 import com.iquantex.samples.inverter.dto.InverterDTO;
-
 import java.util.Date;
 
 /** @author 86187 */

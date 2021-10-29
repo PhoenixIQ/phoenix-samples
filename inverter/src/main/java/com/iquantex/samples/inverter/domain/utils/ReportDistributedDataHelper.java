@@ -4,10 +4,7 @@ import com.iquantex.phoenix.distributed.data.DistributeDataManager;
 import com.iquantex.phoenix.server.aggregate.EntityAggregateContext;
 import com.iquantex.samples.inverter.constant.InverterConst;
 
-/**
- * @author 86187
- * 用来获取DDdate  绑定聚合根
- */
+/** @author 86187 用来获取DDdate 绑定聚合根 */
 public class ReportDistributedDataHelper {
 
   public static <T> T getData(Class<T> cls, String key) {

@@ -6,23 +6,20 @@ import com.iquantex.phoenix.distributed.data.DistributeDataManager;
 import com.iquantex.phoenix.eventpublish.core.EventDeserializer;
 import com.iquantex.phoenix.eventpublish.deserializer.DefaultMessageDeserializer;
 import com.iquantex.samples.inverter.domain.api.msg.InverterData;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Slf4j
 @Component
 public class EventConsumer {
 
-  @Autowired
-  private PhoenixClient client;
+  @Autowired private PhoenixClient client;
 
-  @Autowired
-  private DistributeDataManager distributeDataManager;
+  @Autowired private DistributeDataManager distributeDataManager;
 
   private EventDeserializer<byte[], Message> deserializer = new DefaultMessageDeserializer();
 

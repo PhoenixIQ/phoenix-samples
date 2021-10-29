@@ -1,10 +1,9 @@
 package com.iquantex.samples.inverter.domain.api.msg;
 
 import com.iquantex.samples.inverter.dto.InverterDTO;
+import java.io.Serializable;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.io.Serializable;
 
 /** @author 86187 */
 @Getter

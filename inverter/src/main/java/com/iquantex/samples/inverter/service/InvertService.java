@@ -5,13 +5,6 @@ import com.iquantex.phoenix.client.RpcResult;
 import com.iquantex.samples.inverter.constant.InverterConst;
 import com.iquantex.samples.inverter.domain.api.msg.InverterData;
 import com.iquantex.samples.inverter.dto.InverterDTO;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -19,14 +12,19 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 /** @author 86187 */
 @Service
 @Slf4j
 public class InvertService {
   /** phoenix 客户端 */
-  @Autowired
-  private PhoenixClient client;
+  @Autowired private PhoenixClient client;
 
   public List<InverterDTO> getInverterInfo(List<String> deviceCodes) {
     if (CollectionUtils.isEmpty(deviceCodes)) {

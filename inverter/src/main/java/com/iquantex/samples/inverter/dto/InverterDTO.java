@@ -1,10 +1,9 @@
 package com.iquantex.samples.inverter.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.io.Serializable;
 import java.util.Date;
+import lombok.Getter;
+import lombok.Setter;
 
 /** @author 86187 */
 @Getter
