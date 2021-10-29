@@ -17,7 +17,7 @@
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kafka.version>1.0.0</kafka.version>
-        <phoenix.version>2.4.0-beta.9</phoenix.version>
+        <phoenix.version>2.4.0</phoenix.version>
     </properties>
     <dependencies>
 
