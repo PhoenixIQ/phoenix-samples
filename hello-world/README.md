@@ -37,13 +37,14 @@ spring:
 quantex:
   phoenix:
     client:
-      name: ${spring.application.name}-client	# 服务名称
+      name: ${spring.application.name}-client   # 服务名称
       mq:
-        type: kafka	                            # mq类型
+        type: kafka                             # mq类型
         address: 127.0.0.1:9092                 # mq地址
     server:
       name: ${spring.application.name}    # 服务名称
-      package-name: com.iquantex.phoenix.samples.account   # 聚合根包所在路径
+      package-name: com.iquantex.samples.helloworld.domain   # 聚合根包所在路径
+      default-serializer: proto_stuff # 默认序列化协议
       mq:
         type: kafka                       # mq类型
         address: 127.0.0.1:9092           # mq服务地址
