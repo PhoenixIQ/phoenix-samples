@@ -51,7 +51,6 @@ quantex:
         minIdle: 2
         maxActive: 8
       package-name: "com.iquantex.samples.inverter"
-      license: WPA2pHtCeLplZP0AWIYD6TrZruHRSMLC2xt7NMhxDT+cv9nW14zVnhDpmkG0pVamKWSWVdEWINFfoSnZfyaPooZ38TE/R8qdi+fJI83FzTAMUtfOS8NR71vq+1s+KujJJrQpZQxgGZfylvvHhyMuqWbwJWZ3Nwsd/rZv2HuNHTBDJUWecshxTm8etJI0L/D4q+QREzsa54MB6uvC51D3jiDoBg4N1tKIFjJwsD6ugzsSpVlM9lGU5G43pXpJOSt2RT1e2bETRfteaQWKwEz19iyukG2gXIraR9JJt0TTDvnBVCplm+blHqXIB2VCCR3J7LMzNKhEfOrErFWzU/NjEgBy92kzNP215zSFyG8w5NkfxM5n+zsSEYiXnqqjyOFJBZ+FmNoHMMY7fN01dI7Tx5GWBYaceYJdGc9DoYRpkI+ifg6Xp0yZkDHJiJv1C5oQ0p0S1LxGwlpNWMvl1ElGuPtEvJQbldQQSQMtOX3JWaf/fbzKvFcoA9xB11QYzsLE0KyAaUlZYPYFK/VYxoZSUoFo18F7upWhYbvSN2KNTuFI04lfw4z6rktwO3SDQAdF7AxueQPP4h/iwKhgldO4p4rL5xCWpaNX8x1Ub/y1RETK6hkfE7+YO3nAkmnFTP2JMB6aTmzw14jWCsu3ILt30HPma4S14lNNvTfpnfaUoVsTa0SN0KKIF6ToB960rwhN+P5PEWTZA92EX5CGNCVSoKtcNCQXwDHy685aaIcynq+Ioxdlp7hMjTLSn4uc1RANK7RcsuH6Y1Sla5CPctDXX6Nyw1uE1NEGwBzo8PTmT6c3YB1lOGfOJq8s4uPnxuSsmCoOUvbyIh3YKybQf6dRzQ==
       default-serializer: proto_stuff
       console:
         enabled: true

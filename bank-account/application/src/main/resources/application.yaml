@@ -27,7 +27,7 @@ spring.h2:
 # spring相关
 spring:
   datasource:
-    url: jdbc:h2:file:./data/test;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS PUBLIC
+    url: jdbc:h2:~/data/test;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS PUBLIC
     username: sa
     password:
     driver-class-name: org.h2.Driver
@@ -81,7 +81,7 @@ quantex:
       event-store:
         driver-class-name: org.h2.Driver
         data-sources:
-          - url: jdbc:h2:file:./data/test;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS PUBLIC
+          - url: jdbc:h2:~/data/test;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS PUBLIC
             username: sa
             password:
       default-serializer: proto_stuff

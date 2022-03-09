@@ -18,7 +18,6 @@ quantex:
       event-store:
         driver-class-name: org.h2.Driver
         data-sources:
-          - url: jdbc:h2:file:./db/eventstore;DATABASE_TO_LOWER=TRUE;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;Mode=MySQL
-#          - url: jdbc:h2:mem:eventstore;DATABASE_TO_LOWER=TRUE;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;Mode=MySQL
+          - url: jdbc:h2:~/db/eventstore;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS PUBLIC
             username: sa
             password:
