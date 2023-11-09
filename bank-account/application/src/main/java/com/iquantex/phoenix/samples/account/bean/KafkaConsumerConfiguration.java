@@ -19,6 +19,7 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.listener.AbstractMessageListenerContainer;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.kafka.listener.ContainerProperties.AckMode;
 
 @Slf4j
 @EnableKafka
@@ -55,7 +56,7 @@ public class KafkaConsumerConfiguration {
 		ConcurrentKafkaListenerContainerFactory<String, byte[]> factory = new ConcurrentKafkaListenerContainerFactory<>();
 		factory.setConsumerFactory(consumerFactory);
 		factory.setBatchListener(true);
-		factory.getContainerProperties().setAckMode(AbstractMessageListenerContainer.AckMode.MANUAL_IMMEDIATE);
+		factory.getContainerProperties().setAckMode(AckMode.MANUAL_IMMEDIATE);
 		return factory;
 	}
 

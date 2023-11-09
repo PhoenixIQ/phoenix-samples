@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>2.0.1.RELEASE</version>
+        <version>2.2.6.RELEASE</version>
     </parent>
 
     <groupId>com.iquantex.samples</groupId>
@@ -20,10 +20,11 @@
 
         <!--组件版本-->
         <revision>1.0-SNAPSHOT</revision>
-        <phoenix.version>2.5.0</phoenix.version>
+        <phoenix.version>2.6.0-RC11</phoenix.version>
         <swagger2.version>2.6.1</swagger2.version>
         <lombook.version>1.16.20</lombook.version>
         <proto.version>3.4.0</proto.version>
+        <kafka.version>2.4.1</kafka.version>
     </properties>
 
     <modules>
@@ -37,7 +38,7 @@
         <repository>
             <id>quantex</id>
             <name>Quantex Maven Repository</name>
-            <url>https://artifact.iquantex.com/repository/public</url>
+            <url>https://nexus.iquantex.com/repository/releases</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
@@ -67,5 +68,58 @@
             </plugin>
         </plugins>
     </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.apache.kafka</groupId>
+                <artifactId>kafka_2.12</artifactId>
+                <version>${kafka.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.kafka</groupId>
+                <artifactId>kafka_2.12</artifactId>
+                <version>${kafka.version}</version>
+                <classifier>test</classifier>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.kafka</groupId>
+                <artifactId>kafka-clients</artifactId>
+                <version>${kafka.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.kafka</groupId>
+                <artifactId>kafka-clients</artifactId>
+                <version>${kafka.version}</version>
+                <classifier>test</classifier>
+            </dependency>
+            <!--phoenix-->
+            <dependency>
+                <groupId>com.iquantex</groupId>
+                <artifactId>phoenix-core</artifactId>
+                <version>${phoenix.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.iquantex</groupId>
+                <artifactId>phoenix-server-starter_2.12</artifactId>
+                <version>${phoenix.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.iquantex</groupId>
+                <artifactId>phoenix-transaction_2.12</artifactId>
+                <version>${phoenix.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.iquantex</groupId>
+                <artifactId>phoenix-client-starter_2.12</artifactId>
+                <version>${phoenix.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.iquantex</groupId>
+                <artifactId>phoenix-event-publish-starter_2.12</artifactId>
+                <version>${phoenix.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>
