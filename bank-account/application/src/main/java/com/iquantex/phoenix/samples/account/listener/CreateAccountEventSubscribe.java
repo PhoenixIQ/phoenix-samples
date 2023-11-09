@@ -1,6 +1,6 @@
-package com.iquantex.phoenix.samples.account.domain;
+package com.iquantex.phoenix.samples.account.listener;
 
-import com.iquantex.phoenix.core.connect.api.CollectMetaData;
+import com.iquantex.phoenix.core.connect.api.CollectMetaDataQuery;
 import com.iquantex.phoenix.core.connect.api.CollectResult;
 import com.iquantex.phoenix.core.connect.api.Records;
 import com.iquantex.phoenix.core.connect.api.SourceCollect;
@@ -49,7 +49,7 @@ public class CreateAccountEventSubscribe {
 	class SelfSerializeSchema implements SourceCollect {
 
 		@Override
-		public List<CollectResult> collect(Records records, CollectMetaData collectMetaData) {
+		public List<CollectResult> collect(Records records, CollectMetaDataQuery collectMetaData) {
 			List<CollectResult> collectResults = new ArrayList<>();
 			if (UpperAccountCreateEvent.class.getName().equals(records.getKey())) {
 				UpperAccountCreateEvent event = JsonUtils.decode(new String(records.getValue()), records.getKey());
