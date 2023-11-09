@@ -1,0 +1,74 @@
+# web config
+server:
+  port: 8085
+  servlet:
+    context-path: /
+
+spring:
+  profiles:
+    active: h2
+  main:
+    allow-bean-definition-overriding: true
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      max-poll-records: 100
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+    listener:
+      type: batch
+      ack-mode: batch
+      concurrency: 4
+      poll-timeout: 3000
+
+  application:
+    name: inverter
+  flyway:
+    enabled: true
+  jackson:
+    time-zone: GMT+8
+
+quantex:
+  phoenix:
+    client:
+      name: ${spring.application.name}-client
+      mq:
+        type: kafka
+        address: ${spring.kafka.bootstrap-servers}
+    server:
+      name: ${spring.application.name}
+      performance:
+        batch-process: 250
+      mq:
+        type: kafka
+        address: ${spring.kafka.bootstrap-servers}
+        subscribe:
+          - topic: invert-topic
+      event-store:
+        initialSize: 2
+        minIdle: 2
+        maxActive: 8
+      package-name: "com.iquantex.samples.inverter"
+      default-serializer: proto_stuff
+      console:
+        enabled: true
+    event-publish:
+      enabled: true
+      batch-size: 100
+      buffer-queue-size: 32
+      from-begin: true
+      event-task:
+        enabled: true
+        topic: invert-event
+      monitor-task:
+        enabled: false
+        es-server: localhost:9200
+embedded-kafka: true
+
+# log config
+logging:
+  level:
+    root: info
+  file: log/${spring.application.name}.log

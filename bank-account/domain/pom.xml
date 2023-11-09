@@ -21,11 +21,11 @@
         <!--phoenix-->
         <dependency>
             <groupId>com.iquantex</groupId>
-            <artifactId>phoenix-server-starter_2.12</artifactId>
+            <artifactId>phoenix-server-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>com.iquantex</groupId>
-            <artifactId>phoenix-transaction_2.12</artifactId>
+            <artifactId>phoenix-transaction</artifactId>
         </dependency>
 
         <!-- tool -->

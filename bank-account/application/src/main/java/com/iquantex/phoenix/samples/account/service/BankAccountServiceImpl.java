@@ -71,8 +71,8 @@ public class BankAccountServiceImpl implements BankAccountService {
 		List<AccountQueryEvent> accountQueryEvents = new ArrayList<>();
 		if (linearizability) {
 			accountStores.forEach(accountStore -> {
-				Future<RpcResult<AccountQueryEvent>> future = phoenixClient
-						.send(new AccountQueryCmd(accountStore.getAccountCode()), accountTopic, null);
+				Future<RpcResult> future = phoenixClient.send(new AccountQueryCmd(accountStore.getAccountCode()),
+						accountTopic, null);
 				RpcResult<AccountQueryEvent> rpcResult = null;
 				try {
 					rpcResult = future.get(100, TimeUnit.SECONDS);
@@ -144,7 +144,7 @@ public class BankAccountServiceImpl implements BankAccountService {
 	@Override
 	public String transfer(String outAccountCode, String inAccountCode, double amt) {
 		AccountTransferCmd req = new AccountTransferCmd(inAccountCode, outAccountCode, amt);
-		Future<RpcResult<String>> future = phoenixClient.send(req, accountTnTopic, null);
+		Future<RpcResult> future = phoenixClient.send(req, accountTnTopic, null);
 		RpcResult rpcResult;
 		try {
 			rpcResult = future.get(10, TimeUnit.SECONDS);
@@ -175,7 +175,7 @@ public class BankAccountServiceImpl implements BankAccountService {
 	@Override
 	public String allocate(String account, double amt, String allocateNumber) {
 		AccountAllocateCmd cmd = new AccountAllocateCmd(account, amt, allocateNumber);
-		Future<RpcResult<String>> future = phoenixClient.send(cmd, accountTopic, "");
+		Future<RpcResult> future = phoenixClient.send(cmd, accountTopic, "");
 		try {
 			RpcResult result = future.get(10, TimeUnit.SECONDS);
 			return result.getMessage();
@@ -189,7 +189,7 @@ public class BankAccountServiceImpl implements BankAccountService {
 	public String createAccount(String account, double amt) {
 		Account.AccountCreateCmd createCmd = Account.AccountCreateCmd.newBuilder().setAccountCode(account)
 				.setBalanceAmt(amt).build();
-		Future<RpcResult<String>> future = phoenixClient.send(createCmd, accountTopic, null);
+		Future<RpcResult> future = phoenixClient.send(createCmd, accountTopic, null);
 		try {
 			RpcResult result = future.get(10, TimeUnit.SECONDS);
 			return result.getMessage();

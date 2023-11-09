@@ -11,42 +11,73 @@
 
     <artifactId>hello-world</artifactId>
     <version>${revision}</version>
-    <packaging>pom</packaging>
 
-    <dependencyManagement>
-        <dependencies>
+    <dependencies>
 
-            <!--sub modules-->
-            <dependency>
-                <groupId>com.iquantex.samples</groupId>
-                <artifactId>hello-world.coreapi</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.iquantex.samples</groupId>
-                <artifactId>hello-world.application</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.iquantex.samples</groupId>
-                <artifactId>hello-world.domain</artifactId>
-                <version>${revision}</version>
-            </dependency>
+        <!-- spring-starter -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- protobuf -->
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>${proto.version}</version>
+        </dependency>
+        <!--phoenix-->
+        <dependency>
+            <groupId>com.iquantex</groupId>
+            <artifactId>phoenix-server-starter</artifactId>
+            <version>${phoenix.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.iquantex</groupId>
+            <artifactId>phoenix-client-starter</artifactId>
+            <version>${phoenix.version}</version>
+        </dependency>
 
-            <!--tools-->
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombook.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.google.protobuf</groupId>
-                <artifactId>protobuf-java</artifactId>
-                <version>${proto.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
+        <!-- kafka -->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka_2.12</artifactId>
+            <version>1.0.0</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-log4j12</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka_2.12</artifactId>
+            <version>1.0.0</version>
+            <classifier>test</classifier>
+            <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-log4j12</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--内存版kafka: 运行时需要-->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka-test</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>kafka_2.11</artifactId>
+                    <groupId>org.apache.kafka</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
@@ -59,20 +90,16 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            <!-- springboot打包插件 -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <skip>true</skip>
+                    <skip>false</skip>
+                    <mainClass>com.iquantex.samples.helloworld.HelloWorldApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
 
     </build>
-
-    <modules>
-        <module>application</module>
-        <module>coreapi</module>
-        <module>domain</module>
-    </modules>
 </project>

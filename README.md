@@ -11,6 +11,7 @@ Phoenix是一个高性能的响应式微服务框架
 - [bank-account](bank-account/): 使用Phoenix开发的简单银行账户管理服务
 - [trade-risk](https://github.com/PhoenixIQ/phoenix-sample-risk): 使用Phoenix开发的高性能金融风控服务，该案例以为分支讲解方式，参考另一个仓库
 - [shopping-cart](shopping-cart/): 使用Phoenix开发的购物车服务，该案例介绍了Phoenix查询聚合根内容的方法
+- [inverter](inverter/): 使用Phoenix开发的电站逆变器实时监控，该案例使用了除Phoenix Transaction外大部分Phoenix的功能，包括`分布式数据`，是使用Phoenix开发的全面案例。
 
 # 使用案例
   

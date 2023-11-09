@@ -19,20 +19,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AccountStore implements Serializable {
 
-	/** 账户编码 */
 	@Id
+	// @Column(columnDefinition = "comment '账户编码'")
 	private String accountCode;
 
-	/** 账户余额 */
+	// @Column(columnDefinition = "comment '账户余额'")
 	private double balanceAmt;
 
-	/** 成功转出次数 */
+	// @Column(columnDefinition = "comment '成功转出次数'")
 	private int successTransferOut;
 
-	/** 失败转出次数 */
+	// @Column(columnDefinition = "comment '失败转出次数'")
 	private int failTransferOut;
 
-	/** 成功转入次数 */
+	// @Column(columnDefinition = "comment '成功转入次数'")
 	private int successTransferIn;
 
 }

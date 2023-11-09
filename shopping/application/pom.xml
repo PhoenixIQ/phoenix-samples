@@ -21,7 +21,11 @@
         <!--phoenix-->
         <dependency>
             <groupId>com.iquantex</groupId>
-            <artifactId>phoenix-client-starter_2.12</artifactId>
+            <artifactId>phoenix-client-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.iquantex</groupId>
+            <artifactId>phoenix-eventstore-jdbc</artifactId>
         </dependency>
 
         <!--内部依赖-->
@@ -39,20 +43,14 @@
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
         </dependency>
-         <dependency>
+        <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka_2.12</artifactId>
-            <version>2.4.1</version>
-            <classifier>test</classifier>
-            <scope>compile</scope>
+            <version>1.0.0</version>
             <exclusions>
                 <exclusion>
                     <artifactId>slf4j-log4j12</artifactId>
                     <groupId>org.slf4j</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>log4j</artifactId>
-                    <groupId>log4j</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
