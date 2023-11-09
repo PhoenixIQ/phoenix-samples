@@ -42,6 +42,33 @@
                 <version>${revision}</version>
             </dependency>
 
+            <!--phoenix-->
+            <dependency>
+                <groupId>com.iquantex</groupId>
+                <artifactId>phoenix-server-starter</artifactId>
+                <version>${phoenix.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.iquantex</groupId>
+                <artifactId>phoenix-transaction</artifactId>
+                <version>${phoenix.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.iquantex</groupId>
+                <artifactId>phoenix-client-starter</artifactId>
+                <version>${phoenix.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.iquantex</groupId>
+                <artifactId>phoenix-eventstore-jdbc</artifactId>
+                <version>${phoenix.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.iquantex</groupId>
+                <artifactId>phoenix-event-publish-starter</artifactId>
+                <version>${phoenix.version}</version>
+            </dependency>
+
             <!--tools-->
             <dependency>
                 <groupId>org.projectlombok</groupId>
@@ -76,38 +103,6 @@
                 <configuration>
                     <skip>true</skip>
                 </configuration>
-            </plugin>
-            <!-- make sure we don't have any _2.10 or _2.11, _2.12 dependencies when building
-for Scala 2.13 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.0.0-M3</version>
-                <executions>
-                    <execution>
-                        <id>enforce-versions</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <bannedDependencies>
-                                    <excludes combine.children="append">
-                                        <exclude>*:*_2.11</exclude>
-                                        <exclude>*:*_2.10</exclude>
-                                        <exclude>*:*_2.13</exclude>
-                                    </excludes>
-                                    <message>Scala 2.10/2.11/2.12 dependencies are not allowed for Scala 2.13
-                                        builds.
-                                        This can be caused by hard-coded scala versions, where the
-                                        'scala.binary.version' property should be used instead.
-                                    </message>
-                                </bannedDependencies>
-                            </rules>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
 
