@@ -22,14 +22,13 @@ spring.h2:
     settings:
       web-allow-others: true
 
-
 #---------------------------------------------------客户端&查询端-----------------------------------------------------------
 # spring相关
 spring:
   datasource:
-    url: jdbc:h2:~/data/test;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS PUBLIC
+    url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS PUBLIC
     username: sa
-    password:
+    password: 123
     driver-class-name: org.h2.Driver
   kafka:
     bootstrap-servers: 127.0.0.1:9092
@@ -42,7 +41,7 @@ spring:
       ddl-auto: update
       naming:
         physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database-platform: org.hibernate.dialect.H2Dialect
     show-sql: false
 # topic相关
 phoenix:
@@ -81,9 +80,9 @@ quantex:
       event-store:
         driver-class-name: org.h2.Driver
         data-sources:
-          - url: jdbc:h2:~/data/test;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS PUBLIC
+          - url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS PUBLIC
             username: sa
-            password:
+            password: 123
       default-serializer: proto_stuff
       package-name: com.iquantex.phoenix.samples.account
     event-publish:
@@ -91,13 +90,6 @@ quantex:
         enabled: true
         topic: account-event-pub
         broker-server: 127.0.0.1:9092
-# 账户聚合根主动订阅账户创建的事件
-
-create-account-event:
-  subscribe:
-    enabled: true
-    address: 127.0.0.1:9092
-    topic: create-account-event
 
 # 事务聚合根发出划拨Cmd的目标Topic(默认值为空字符串代表本集群)
 saga-allocate-cmd-topic: ""
@@ -117,3 +109,20 @@ eureka:
     appname: ${spring.application.name}
     metadata-map:
       phoenixEnabled: true
+
+# 账户聚合根主动订阅账户创建的事件
+create-account-event.subscribe:
+    enabled: true
+    address: 127.0.0.1:9092
+    topic: create-account-event
+# phoenix支持的广播功能配置
+eq10.subscribe:
+  enabled: false
+  address: ${quantex.phoenix.server.mq.address}
+  topic: subscribe
+# 聚合根心跳场景开关
+bank-account.heartbeat: false
+# 聚合根 CPU-Bound 计算场景开关
+bank-account.cpu-bound: false
+# 模拟延迟
+mock-latency: 1

@@ -21,16 +21,15 @@
         <!--phoenix-->
         <dependency>
             <groupId>com.iquantex</groupId>
-            <artifactId>phoenix-server-starter</artifactId>
+            <artifactId>phoenix-server-starter_2.12</artifactId>
         </dependency>
         <dependency>
             <groupId>com.iquantex</groupId>
-            <artifactId>phoenix-transaction</artifactId>
-            <version>${phoenix.version}</version>
+            <artifactId>phoenix-transaction_2.12</artifactId>
         </dependency>
         <dependency>
             <groupId>com.iquantex</groupId>
-            <artifactId>phoenix-client-starter</artifactId>
+            <artifactId>phoenix-client-starter_2.12</artifactId>
         </dependency>
     </dependencies>
 
