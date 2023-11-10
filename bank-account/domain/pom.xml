@@ -12,6 +12,11 @@
     <artifactId>bank-account.domain</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>${kafka.version}</version>
+        </dependency>
         <!--内部依赖-->
         <dependency>
             <groupId>com.iquantex.samples</groupId>
@@ -21,11 +26,11 @@
         <!--phoenix-->
         <dependency>
             <groupId>com.iquantex</groupId>
-            <artifactId>phoenix-server-starter</artifactId>
+            <artifactId>phoenix-server-starter_2.12</artifactId>
         </dependency>
         <dependency>
             <groupId>com.iquantex</groupId>
-            <artifactId>phoenix-transaction</artifactId>
+            <artifactId>phoenix-transaction_2.12</artifactId>
         </dependency>
 
         <!-- tool -->

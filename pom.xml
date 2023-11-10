@@ -20,7 +20,7 @@
 
         <!--组件版本-->
         <revision>1.0-SNAPSHOT</revision>
-        <phoenix.version>2.5.0</phoenix.version>
+        <phoenix.version>2.6.0-RC13-SNAPSHOT</phoenix.version>
         <swagger2.version>2.6.1</swagger2.version>
         <lombook.version>1.16.20</lombook.version>
         <proto.version>3.4.0</proto.version>
@@ -28,16 +28,13 @@
 
     <modules>
         <module>bank-account</module>
-        <module>hello-world</module>
-        <module>shopping</module>
-        <module>shopping-cart</module>
     </modules>
 
     <repositories>
         <repository>
             <id>quantex</id>
             <name>Quantex Maven Repository</name>
-            <url>https://artifact.iquantex.com/repository/public</url>
+            <url>https://nexus.iquantex.com/repository/snapshots</url>
             <releases>
                 <enabled>true</enabled>
             </releases>

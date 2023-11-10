@@ -74,6 +74,7 @@ quantex:
       console:
         enabled: true
       mq:
+        consumer-type: poll # push 不支持低版本的 kafka
         type: kafka
         address: 127.0.0.1:9092
         subscribe:
