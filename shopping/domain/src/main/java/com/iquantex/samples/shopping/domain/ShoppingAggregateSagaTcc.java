@@ -7,6 +7,7 @@ import com.iquantex.phoenix.core.message.protobuf.Phoenix;
 import com.iquantex.phoenix.transaction.aggregate.SagaAction;
 import com.iquantex.phoenix.transaction.aggregate.TccAction;
 import com.iquantex.phoenix.transaction.aggregate.TransactionAggregateAnnotation;
+import com.iquantex.phoenix.transaction.aggregate.TransactionFinishReturn;
 import com.iquantex.phoenix.transaction.aggregate.TransactionReturn;
 import com.iquantex.phoenix.transaction.aggregate.TransactionStart;
 import com.iquantex.samples.shopping.coreapi.account.AccountCancelCmd;
@@ -33,7 +34,7 @@ public class ShoppingAggregateSagaTcc implements Serializable {
 	private String remark = "商品购买成功";
 
 	@TransactionStart
-	public TransactionReturn on(BuyGoodsCmd request) {
+	public TransactionReturn act(BuyGoodsCmd request) {
 		this.request = request;
 		double frozenAmt = request.getQty() * request.getPrice();
 		return TransactionReturn.builder()
@@ -79,8 +80,8 @@ public class ShoppingAggregateSagaTcc implements Serializable {
 		return null;
 	}
 
-	public Object onFinish() {
-		return new BuyGoodsEvent(remark);
+	public TransactionFinishReturn onFinish() {
+		return TransactionFinishReturn.builder().retMessage("SUCCESS").data(new BuyGoodsEvent(remark)).build();
 	}
 
 }

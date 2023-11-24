@@ -133,7 +133,7 @@ public class ShoppingAggregateTcc implements Serializable {
     private String remark = "";
 
     @TransactionStart
-    public TransactionReturn on(BuyGoodsCmd request) {
+    public TransactionReturn act(BuyGoodsCmd request) {
         this.request = request;
         double frozenAmt = request.getQty() * request.getPrice();
         return TransactionReturn
