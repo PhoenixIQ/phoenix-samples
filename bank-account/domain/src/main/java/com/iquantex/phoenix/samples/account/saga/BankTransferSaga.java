@@ -32,7 +32,7 @@ public class BankTransferSaga implements Serializable {
 	 * @return
 	 */
 	@TransactionStart
-	public TransactionReturn on(AccountTransferCmd request) {
+	public TransactionReturn act(AccountTransferCmd request) {
 		this.request = request;
 		return TransactionReturn.builder().addAction(
 				// saga事务
